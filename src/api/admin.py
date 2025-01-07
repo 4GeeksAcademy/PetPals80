@@ -1,8 +1,8 @@
 import os
-from flask_admin import Admin
+from flask_admin import Admin # type: ignore
 from flask import redirect, url_for
-from flask_login import current_user
-from flask_admin.contrib.sqla import ModelView
+from flask_login import current_user # type: ignore
+from flask_admin.contrib.sqla import ModelView # type: ignore
 from api.models import db, User, Followers, Forum, Posts, Comments, Ban
 
 # Custom ModelView to add authentication
