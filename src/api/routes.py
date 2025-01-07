@@ -1,22 +1,33 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, Blueprint
 from api.models import db, User
-from api.utils import generate_sitemap, APIException
+from api.utils import APIException
 from flask_cors import CORS
 
 api = Blueprint('api', __name__)
-
-# Allow CORS requests to this API
 CORS(api)
-
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
+    """
+    A simple endpoint to test API responses.
+    
+    Methods:
+    - GET: Returns a greeting message.
+    - POST: Returns a message including the JSON payload sent in the request.
+    """
+    try:
+        if request.method == 'GET':
+            response_body = {
+                "message": "Hello! This is a GET response."
+            }
+        elif request.method == 'POST':
+            data = request.json or {}
+            response_body = {
+                "message": f"Hello! This is a POST response. You sent: {data}"
+            }
+        return jsonify(response_body), 200
+    except Exception as e:
+        raise APIException(f"An unexpected error occurred: {str(e)}", status_code=500)
