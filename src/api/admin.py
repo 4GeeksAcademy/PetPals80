@@ -1,19 +1,8 @@
 import os
 from flask_admin import Admin # type: ignore
 from flask import redirect, url_for
-from flask_login import current_user # type: ignore
 from flask_admin.contrib.sqla import ModelView # type: ignore
 from api.models import db, User, Followers, Forum, Posts, Comments, Ban
-
-# Custom ModelView to add authentication
-class MyModelView(ModelView):
-    def is_accessible(self):
-        # Allow access only to authenticated users with is_admin=True
-        return current_user.is_authenticated and getattr(current_user, 'is_admin', False)
-
-    def inaccessible_callback(self, name, **kwargs):
-        # Redirect unauthenticated users to login page
-        return redirect(url_for('login'))
 
 def setup_admin(app):
     # Ensure FLASK_APP_KEY is set
@@ -25,12 +14,12 @@ def setup_admin(app):
 
     # Add models to Flask-Admin interface
     try:
-        admin.add_view(MyModelView(User, db.session))
-        admin.add_view(MyModelView(Followers, db.session))
-        admin.add_view(MyModelView(Forum, db.session))
-        admin.add_view(MyModelView(Posts, db.session))
-        admin.add_view(MyModelView(Comments, db.session))
-        admin.add_view(MyModelView(Ban, db.session))
+        admin.add_view(ModelView(User, db.session))
+        admin.add_view(ModelView(Followers, db.session))
+        admin.add_view(ModelView(Forum, db.session))
+        admin.add_view(ModelView(Posts, db.session))
+        admin.add_view(ModelView(Comments, db.session))
+        admin.add_view(ModelView(Ban, db.session))
     except Exception as e:
         print(f"Error adding model to admin: {e}")
         raise
