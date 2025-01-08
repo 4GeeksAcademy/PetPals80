@@ -1,0 +1,122 @@
+.custom-navbar {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: 'Oswald', sans-serif; 
+}
+
+.nav-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.pink-square {
+    position: absolute;
+    top: -50px;
+    right: -20px;
+    width: 150px;
+    height: 150px;
+    background: #FFD6E0;
+    border-radius: 50%;
+    opacity: 0.6;
+    /* hacer esto un cuadrado como en la imagen de Aitor */
+}
+
+.purple-triangle {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    width: 120px;
+    height: 120px;
+    background: #E6E6FA;
+    border-radius: 50%;
+    opacity: 0.6;
+    /* hacer esto un triangulo como en la imagen de aitor */
+}
+
+.nav-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.nav-links li {
+    margin: 0 30px;
+}
+
+.nav-links li.brand {
+    font-size: 28px;  
+    font-weight: 600;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    position: relative;  
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #FF69B4;
+    opacity: 0;  
+    transition: opacity 0.3s ease;  
+}
+
+.nav-links a:hover::after {
+    opacity: 1; 
+}
+
+.nav-links a.active::after {
+    opacity: 1;  
+}
+
+.nav-links li.brand a::after {
+    display: none;  
+}
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        padding: 0 20px;
+    }
+    
+    .nav-links li {
+        margin: 0 15px;
+    }
+
+    .nav-links a {
+        font-size: 14px;  
+    }
+
+    .nav-links li.brand {
+        font-size: 24px;  
+    }
+}
