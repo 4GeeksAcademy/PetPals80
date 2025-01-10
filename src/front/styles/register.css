@@ -1,0 +1,45 @@
+.auth-left {
+    flex: 1;
+    position: relative;
+}
+
+.auth-right {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-check {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.form-check label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-prompt {
+    color: #666;
+}
+
+.login-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}

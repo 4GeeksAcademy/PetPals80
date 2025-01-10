@@ -1,0 +1,47 @@
+.auth-left {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-right {
+    flex: 1;
+    position: relative;
+}
+
+.login-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot-password {
+    display: block;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+
+.forgot-password:hover {
+    color: #333;
+}
+
+.register-prompt {
+    color: #666;
+}
+
+.register-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
