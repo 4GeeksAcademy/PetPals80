@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+
+.foros-container {
+    position: relative;
+    padding: 40px 20;
+
+    margin: 0 auto;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden; 
+}
+
+
+/* Blue circle */
+.foros-container::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background-color: #B5D1E2; 
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Yellow rectangle */
+.foros-container::after {
+    content: '';
+    position: absolute;
+    top: 200px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #FFF3CC; 
+    border-radius: 30px;
+    transform: rotate(-10deg);
+    z-index: -1;
+}
+
+/* Red line */
+.decorative-line-1 {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 150px;
+    height: 30px;
+    background-color: #FFB6C1;
+    transform: rotate(70deg);
+    z-index: -1;
+    border-radius: 15px;
+}
+
+/* Blue line */
+.decorative-line-2 {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    height: 30px;
+    background-color: #B5D1E2;
+    transform: rotate(70deg);
+    z-index: -1;
+    border-radius: 15px;
+}
+
+.content-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.pink-text {
+    color: #FFB6C1;
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.welcome-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.carousel-section {
+    margin-top: 50px;
+}
+
+.custom-carousel {
+    padding: 20px 0;
+}
+
+.carousel-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.pet-card {
+    position: relative;
+    width: 250px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.pet-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.pet-label {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.carousel-item {
+    transition: transform .6s ease-in-out;
+}
+
+
+@media (max-width: 1200px) {
+    .pet-card {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .carousel-group {
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pet-card {
+        width: 250px;
+        height: 250px;
+    }
+}
