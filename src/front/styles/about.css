@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.about-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+}
+
+.about-container {
+    position: relative;
+    width: 100%;
+    padding: 60px 0;
+}
+
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-section {
+    flex: 1;
+    max-width: 500px;
+    padding-right: 40px;
+}
+
+.about-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.read-more-btn {
+    background-color: #9FD5C9;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.read-more-btn:hover {
+    transform: translateY(-2px);
+}
+
+.image-section {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle-background {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background-color: #9FD5C9;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.dragon-image {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    height: auto;
+}
+
+/* Decorative shapes */
+.decorative-shape-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background-color: #E6E6FA;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.decorative-shape-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background-color: #FFB6C1;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-section {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+
+    .about-title {
+        font-size: 2.5rem;
+    }
+
+    .circle-background {
+        width: 300px;
+        height: 300px;
+    }
+
+    .dragon-image {
+        max-width: 350px;
+    }
+}
