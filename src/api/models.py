@@ -4,7 +4,7 @@ from datetime import datetime
 db = SQLAlchemy()
 
 # USER TABLE ------------------------------------------------------------
-class User(db.Model):
+class Users(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True, nullable=False)
@@ -12,9 +12,16 @@ class User(db.Model):
     password = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    forums = db.relationship('Forums', backref='users', lazy=True) #esto crea una relación de uno a muchos entre Users(I) y Forums(II) permite que un User tenga múltiples Foros
+    posts = db.relationship('Posts', backref='users', lazy=True) #esto crea una relación de uno a muchos entre Users(I) y Posts(II) y permite que un User tenga múltiples Posts
+    comments = db.relationship('Comments', backref='user', lazy=True) #esto crea una relación de uno a muchos entre User(I) y Comments(II) y permite que un Users tenga múltiples Comments
+    bans = db.relationship('Bans', backref='user', lazy=True) #permite que múltiples Bans esten asociados a un único User
+    followers = db.relationship( 'Followers', foreign_keys='Followers.follower_id', backref='follower', lazy='dynamic') #define relación entre Users y Followers
+    followed = db.relationship( 'Followers', foreign_keys='Followers.followed_id', backref='followed', lazy='dynamic' )
+
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'<Users {self.email}>'
 
     def serialize(self):
         return {
@@ -24,20 +31,34 @@ class User(db.Model):
             "is_active": self.is_active,
             "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
+    
+#INTERMEDIATE MODEL OF ASSOCIATION (FollId) ---------------------------------------------------------------
 
-# FOLLOWERS TABLE ------------------------------------------------------------
+class FollId(db.Model): 
+    __tablename__ = 'FollId' #esta tabla almacena las claves foráneas los tres modelos, permitiendo la asociación entre ellas
+    id = db.Column(db.Integer, primary_key=True)
+    user_id= db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    follower_id= db.Column(db.Integer, db.ForeignKey('followers.id'), nullable=False)
+    #followed_id= db.Column(db.Integer, db.ForeignKey('users.followed'), nullable=False)
+
+    def __repr__ (self):
+        return f'<FollId {self.id}>'
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "follower_id": self.follower_id,
+            "followed_id": self.followed_id
+        }
+
+
+
+# FOLLOWERS TABLE ---------------------------------------------------------------
 class Followers(db.Model):
     __tablename__ = 'followers'
     id = db.Column(db.Integer, primary_key=True)
-    followers_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-
-    follower = db.relationship('User', foreign_keys=[followers_id], backref='following')
-    followed = db.relationship('User', foreign_keys=[followed_id], backref='followers')
-
-    __table_args__ = (
-        db.UniqueConstraint('followers_id', 'followed_id', name='unique_followers'),
-    )
 
     def serialize(self):
         return {
@@ -46,21 +67,20 @@ class Followers(db.Model):
             "followed_id": self.followed_id
         }
 
-# FORUM TABLE ------------------------------------------------------------
-class Forum(db.Model):
+# FORUMS TABLE ------------------------------------------------------------
+class Forums(db.Model):
     __tablename__ = 'forums'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False) #permite que múltiples Forums esten asociados a un único User
+    posts_id = db.relationship('Posts', backref='forums', lazy=True) #permite que múltiples Posts esten asociados a un único Forum
 
-    user = db.relationship('User', backref='forums')
 
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
-            "user_id": self.user_id,
             "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
@@ -68,13 +88,11 @@ class Forum(db.Model):
 class Posts(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
-    forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
-
-    forum = db.relationship('Forum', backref='posts')
-    user = db.relationship('User', backref='posts')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False) #cada Post esta asociada a un único User
+    forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'), nullable=False) #cada Post esta asociada a un único Forum
+    comments = db.relationship('Comments', backref='posts', lazy=True) # relación Forum(I) a Comments (II)
 
     def serialize(self):
         return {
@@ -90,12 +108,10 @@ class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
-
-    post = db.relationship('Posts', backref='comments')
-    user = db.relationship('User', backref='comments')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'), nullable=False) #cada Comment esta asociado a un único Forum
 
     def serialize(self):
         return {
@@ -107,15 +123,14 @@ class Comments(db.Model):
         }
 
 # BAN TABLE ------------------------------------------------------------
-class Ban(db.Model):
+class Bans(db.Model):
     __tablename__ = 'bans'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     reason = db.Column(db.Text, nullable=False)
     start_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     end_date = db.Column(db.DateTime, nullable=True)
-
-    user = db.relationship('User', backref='bans')
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False) #cada Ban esta asociado a un único User
+    
 
     def serialize(self):
         return {
