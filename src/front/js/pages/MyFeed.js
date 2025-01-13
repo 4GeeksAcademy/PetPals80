@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
 
-const MyFeed = () => {
+
+export const MyFeed = () => {
   // Estados para los campos editables
   const [name, setName] = useState("ELENAGÓMEZ");
   const [location, setLocation] = useState("Valladolid, España");
@@ -100,4 +101,4 @@ const MyFeed = () => {
   );
 };
 
-export default MyFeed;
+

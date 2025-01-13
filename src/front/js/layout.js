@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Router, Routes, Route, Link } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
@@ -7,7 +7,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-import MyFeed from "./pages/MyFeed";
+import { MyFeed } from "./pages/MyFeed";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
