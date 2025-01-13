@@ -77,9 +77,8 @@
 		"react": "^16.8.4",
 		"react-dom": "^16.8.4",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.3.0"
+		"react-router-dom": "^6.3.0",
+		"swiper": "^11.2.1"
 	},
-
-"proxy": "http://localhost:3001"
+	"proxy": "http://localhost:3001"
 }
-
