@@ -11,10 +11,10 @@ import { MyFeed } from "./pages/MyFeed";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Foros } from "./views/Foros.jsx";
-import { About } from "./views/About.jsx";
-import { Login } from "./views/Login.jsx";
-import { Register } from "./views/Register.jsx";
+import { Foros } from "./pages/Foros.jsx";
+import { About } from "./pages/About.jsx";
+import { Login } from "./pages/Login.jsx";
+import { Register } from "./pages/Register.jsx";
 
 //create your first component
 const Layout = () => {
