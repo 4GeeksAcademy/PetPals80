@@ -1,0 +1,335 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+  }
+  
+  .header nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .header nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  
+  .banner {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Altura del banner */
+    overflow: hidden;
+    background: repeating-linear-gradient(
+      45deg,
+      #f8f9fa,
+      #f8f9fa 10px,
+      #e9ecef 10px,
+      #e9ecef 20px
+    ); /* Añadir líneas diagonales */
+  }
+  
+  .banner img {
+    display: block; /* Mostrar la imagen del banner */
+    width: 100%;
+    height: auto;
+  }
+
+  .banner.has-image img {
+    display: block; /* Mostrar la imagen del banner si está presente */
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .change-banner-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #F7BED1;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .change-banner-button:hover {
+    background-color: #E6A8B8;
+  }
+  
+  .profile-section {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .profile-section .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    background: repeating-linear-gradient(
+      45deg,
+      #f8f9fa,
+      #f8f9fa 10px,
+      #e9ecef 10px,
+      #e9ecef 20px
+    ); /* Añadir líneas diagonales */
+  }
+  
+  .editable-input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    font-size: 24px; /* Tamaño de letra más grande */
+    font-family: Arial, sans-serif; /* Mismo tipo de letra que el navbar */
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .editable-input:focus {
+    outline: none;
+    border-bottom: 1px solid #000;
+  }
+  
+  .posts-section {
+    margin: 20px;
+  }
+  
+  .posts-section .add-post-button {
+    background-color: #BBDFD3;
+    color: #fff;
+    border: none;
+    padding: 5px 10px; /* Tamaño más pequeño */
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .posts-section .add-post-button:hover {
+    background-color: #A0CFC1;
+  }
+  
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    gap: 10px; /* Espacio entre los posts */
+  }
+  
+  .post-item {
+    flex: 1 1 calc(20% - 10px); /* Ajustar el ancho para 5 posts por línea */
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-sizing: border-box; /* Incluir padding y borde en el tamaño total */
+  }
+
+  .post-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .change-image-button {
+    background-color: transparent;
+    color: #F7BED1;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .change-image-button:hover {
+    text-decoration: underline;
+  }
+
+  .edit-button {
+    background-color: transparent;
+    color: #F7BED1;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+
+  .edit-button:hover {
+    text-decoration: underline;
+  }
+
+  .name-location-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .edit-buttons-container {
+    margin-top: 10px;
+  }
+
+  .profile-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .placeholder-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background-color: #f0f0f0;
+  }
+
+  .tabs a {
+    color: #CBCBE7;
+    margin: 0 15px;
+    text-decoration: none;
+  }
+
+  .tabs a.active {
+    font-weight: bold;
+    text-decoration: underline.
+  }
+
+  .editable-display {
+    font-size: 24px; /* Tamaño de letra más grande */
+    font-family: Arial, sans-serif; /* Mismo tipo de letra que el navbar */
+    color: #333; /* Mismo color que el navbar */
+  }
+
+  .posts-header {
+    display: flex;
+    flex-direction: column; /* Cambiar a columna */
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center; /* Centrar verticalmente */
+    position: relative; /* Añadir posición relativa */
+  }
+
+  .posts-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .posts-title-text {
+    font-family: Arial, sans-serif; /* Mismo tipo de letra que el navbar */
+    margin: 0;
+    text-align: center; /* Centrar el texto */
+  }
+
+  .add-post-button {
+    position: absolute; /* Posicionar absolutamente */
+    left: 0; /* Alinear a la izquierda */
+    margin-top: 10px; /* Añadir margen superior */
+  }
+
+  .posts-title h3 {
+    font-family: Arial, sans-serif; /* Mismo tipo de letra que el navbar */
+    margin: 0;
+  }
+
+  .bio-section {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .bio-input {
+    width: 39%;
+    height: 101px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin: 0 auto 10px auto; /* Centrar y añadir margen inferior */
+  }
+
+  .save-bio-button {
+    background-color: #BBDFD3;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block; /* Convertir en bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+  }
+
+  .save-bio-button:hover {
+    background-color: #A0CFC1;
+  }
+
+  .add-post-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .new-post-input {
+    width: 100%; /* Ajustar al 100% del contenedor */
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 10px;
+  }
+
+  .new-post-image-input {
+    margin-bottom: 10px;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .save-post-button {
+    background-color: #BBDFD3;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .save-post-button:hover {
+    background-color: #A0CFC1;
+  }
+
+  .delete-post-button {
+    background-color: transparent; /* Hacer transparente */
+    color: #a888ff;
+    border: none;
+    padding: 2px 5px; /* Hacer más pequeño */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px; /* Reducir tamaño de fuente */
+    margin-top: 10px;
+  }
+
+  .delete-post-button:hover {
+    text-decoration: underline; /* Añadir subrayado al pasar el ratón */
+  }
