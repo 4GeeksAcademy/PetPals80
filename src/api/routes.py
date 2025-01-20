@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import db, Users, Forums, Followers, Bans, Posts, Comments
 from api.utils import APIException
 from flask_cors import CORS
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 
 api = Blueprint('api', __name__)
 CORS(api)
@@ -12,6 +13,70 @@ CORS(api)
 
 #GET METHODS_________________________________________________________________________________________________________________________________________________________________
 
+#PEDIDOS TOKENS___________________
+
+#Pedidos para Registrar y Logear
+
+#Acceso usuarios registrados ----------------------------
+
+@api.route('/protected', methods=['GET'])
+@jwt_required()
+def protected():
+    id = get_jwt_identity() #obtiene id almacenado en el token
+    user = Users.query.get(id) #busca el usuario en la base de datos, si el resultado es None no existe
+    if not user:
+        return jsonify({"msg": "Algo ha ido mal"})
+    return jsonify({"data": user.serialize()}), 200
+
+#Registro de Usuario ----------------------------
+
+@api.route('/register', methods=['POST'])
+def register():
+    try:
+        #extraemos info
+        username = request.json.get('username', None)
+        email = request.json.get('email', None) #le decimos al final que si no hay email, nos devuelva none
+        password = request.json.get('password', None)
+        #checkeamos toda la info este
+        if not email or not password:
+            raise Exception ('missing data') #si no tengo email o password me devuelve esto
+        #checkeamos que el usuario existe
+        check_user = Users.query.filter_by(email=email).first() #.first() quiere decir que cuando encuentre el primero que pare
+        #si no existe lo creamos
+        if not check_user:
+            new_user = Users(username=username, email=email, password=password, is_active=True) #crear un nuevo usuario
+            db.session.add(new_user) #añade a la tabla de la db
+            db.session.commit() #guarda los cambios en la db
+            access_token = create_access_token(identity=str(new_user.id)) #estamos creando un token cuya identidad va a ser el id del usuario de arriba
+        
+            return ({"msg": "Ok!", "token": access_token}), 201
+        #si el usuario existe devolvemos que ya hay una cuenta con ese correo
+        return jsonify({"msg": "Usuario vinculado a este correo, intenta iniciar sesión"}), 400
+
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+    
+#Login ----------------------------
+
+@api.route('/login', methods=['POST'])
+def login():
+    try:
+        #extraemos info
+        email = request.json.get('email', None)
+        password = request.json.get('password', None)
+        #checkeamos toda la info este
+        if not email or not password:
+            raise Exception ('missing data')
+        #checkeamos que el usuario existe -----
+        check_user = Users.query.filter_by(email=email).first() #.first() quiere decir que cuando encuentre el primero que pare
+        #si existe, si el password que estoy recibiendo es igual que el almacenado
+        if check_user.password == password:
+            access_token = create_access_token(identity=str(check_user.id)) #si eso pasa creo mi asscess token y lo envío
+            return ({"msg": "Ok!", "token": access_token}), 201
+        return jsonify({"msg": "Usuario vinculado a este correo, intenta iniciar sesión"}), 400
+
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
 
 #PEDIDOS ÚNICOS DE ADMINISTRADOR _______________________________________________________________________________________________
 
