@@ -7,7 +7,9 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-import { MyFeed } from "./pages/MyFeed";
+import MyFeed from "./pages/MyFeed"; // Importar el componente MyFeed
+import { Publicaciones } from "./pages/Publicaciones";
+
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -31,6 +33,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<MyFeed />} path="/MyFeed" />
+                        <Route element={<Publicaciones />} path="/Publicaciones" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

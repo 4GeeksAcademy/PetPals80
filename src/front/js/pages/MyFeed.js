@@ -15,9 +15,6 @@ const MyFeed = () => {
   const [isEditingBio, setIsEditingBio] = useState(false); // Estado para editar la biografía
   const [activeTab, setActiveTab] = useState("bio"); // Estado para la pestaña activa
   const [posts, setPosts] = useState([]); // Estado para los posts, inicializado vacío
-  const [isAddingPost, setIsAddingPost] = useState(false); // Estado para mostrar el cuadro de añadir post
-  const [newPostContent, setNewPostContent] = useState(""); // Estado para el contenido del nuevo post
-  const [newPostImage, setNewPostImage] = useState(null); // Estado para la imagen del nuevo post
 
   useEffect(() => {
     if (!name) setIsEditingName(true);
@@ -48,24 +45,8 @@ const MyFeed = () => {
     localStorage.setItem("bio", bio);
     alert("Biografía guardada");
   };
-  const handleAddPost = () => {
-    setIsAddingPost(true);
-  };
-  const handleSavePost = () => {
-    if (newPostContent || newPostImage) {
-      const newPost = { content: newPostContent, image: newPostImage };
-      setPosts([...posts, newPost]);
-      setNewPostContent("");
-      setNewPostImage(null);
-      setIsAddingPost(false);
-    }
-  };
-  const handleNewPostImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) setNewPostImage(URL.createObjectURL(file));
-  };
-  const handleDeletePost = (index) => {
-    setPosts(posts.filter((_, i) => i !== index));
+  const handleEditBio = () => {
+    setIsEditingBio(true);
   };
 
   return (
