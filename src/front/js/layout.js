@@ -11,6 +11,10 @@ import { MyFeed } from "./pages/MyFeed";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Foros } from "./pages/Foros.jsx";
+import { About } from "./pages/About.jsx";
+import { Login } from "./pages/Login.jsx";
+import { Register } from "./pages/Register.jsx";
 
 //create your first component
 const Layout = () => {
@@ -30,6 +34,10 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route path="/foros" element={<Foros />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/login" element={<Login />} />
+						<Route path="/register" element={<Register />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
                     </Routes>
                     <Footer />
