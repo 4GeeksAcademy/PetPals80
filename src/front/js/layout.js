@@ -16,6 +16,8 @@ import { About } from "./pages/About.jsx";
 import { Login } from "./pages/Login.jsx";
 import { Register } from "./pages/Register.jsx";
 
+import { ForosGatos } from "./pages/ForosGatos.jsx"; 
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -39,6 +41,7 @@ const Layout = () => {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
+                        <Route path="/foros-gatos" element={<ForosGatos />} /> 
                     </Routes>
                     <Footer />
                 </ScrollToTop>
