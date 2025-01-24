@@ -1,111 +1,173 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
-
+import { Publicaciones } from "./Publicaciones"; // Importar el nuevo componente
 
 const MyFeed = () => {
   // Estados para los campos editables
-  const [name, setName] = useState("ELENAGÓMEZ");
-  const [location, setLocation] = useState("Valladolid, España");
-  const [profileImage, setProfileImage] = useState("path-to-default-profile.jpg");
-  const [posts, setPosts] = useState([
-    "El amor de un perro es tan puro y desinteresado que nos enseña el verdadero significado de la lealtad y la amistad.",
-  ]);
+  const [name, setName] = useState(() => localStorage.getItem("name") || "");
+  const [location, setLocation] = useState(() => localStorage.getItem("location") || "");
+  const [profileImage, setProfileImage] = useState(""); // Inicializar como cadena vacía
+  const [bannerImage, setBannerImage] = useState("path-to-banner-image.jpg"); // Estado para la imagen del banner
+  const [bio, setBio] = useState(() => localStorage.getItem("bio") || ""); // Estado para la biografía
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingLocation, setIsEditingLocation] = useState(false);
+  const [isEditingBio, setIsEditingBio] = useState(false); // Estado para editar la biografía
+  const [activeTab, setActiveTab] = useState("bio"); // Estado para la pestaña activa
+  const [posts, setPosts] = useState([]); // Estado para los posts, inicializado vacío
+
+  useEffect(() => {
+    if (!name) setIsEditingName(true);
+    if (!location) setIsEditingLocation(true);
+  }, [name, location]);
 
   // Handlers
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleLocationChange = (e) => setLocation(e.target.value);
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    localStorage.setItem("name", e.target.value);
+  };
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+    localStorage.setItem("location", e.target.value);
+  };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+    if (file) setProfileImage(URL.createObjectURL(file));
   };
-  const handleAddPost = () => {
-    const newPost = prompt("Escribe tu nuevo post:");
-    if (newPost) setPosts([...posts, newPost]);
+  const handleBannerImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setBannerImage(URL.createObjectURL(file));
+  };
+  const handleBioChange = (e) => {
+    setBio(e.target.value);
+  };
+  const handleSaveBio = () => {
+    localStorage.setItem("bio", bio);
+    alert("Biografía guardada");
+  };
+  const handleEditBio = () => {
+    setIsEditingBio(true);
   };
 
   return (
     <div className="my-feed">
-      {/* Header */}
-      <div className="header">
-        <h1>Petpals</h1>
-        <nav>
-          <a href="#about">About</a>
-          <a href="#my-feed" className="active">
-            My Feed
-          </a>
-          <a href="#forums">Forums</a>
-          <a href="#my-forums">My Forums</a>
-        </nav>
-      </div>
-
       {/* Banner */}
       <div className="banner">
-        <img src="path-to-banner-image.jpg" alt="Dog Banner" />
+        <img src={bannerImage} alt="" className="banner-image" />
+        <input
+          type="file"
+          id="banner-image-upload"
+          style={{ display: "none" }}
+          onChange={handleBannerImageChange}
+        />
+        <button onClick={() => document.getElementById('banner-image-upload').click()} className="change-banner-button">
+          Cambiar Imagen
+        </button>
       </div>
 
       {/* User Profile Section */}
       <div className="profile-section">
         {/* Imagen editable */}
-        <label htmlFor="profile-image-upload">
-          <img src={profileImage} alt="Profile" className="profile-image" />
-        </label>
-        <input
-          type="file"
-          id="profile-image-upload"
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
+        <div className="profile-image-container">
+          <label htmlFor="profile-image-upload">
+            {profileImage ? (
+              <img src={profileImage} alt="Profile" className="profile-image" />
+            ) : (
+              <div className="placeholder-image"></div>
+            )}
+          </label>
+          <input
+            type="file"
+            id="profile-image-upload"
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+          />
+          <button onClick={() => document.getElementById('profile-image-upload').click()} className="change-image-button">
+            Cambiar Foto
+          </button>
+        </div>
+        
+        {/* Contenedor para nombre y ubicación */}
+        <div className="name-location-container">
+          {/* Nombre editable */}
+          {isEditingName ? (
+            <input
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              onBlur={() => setIsEditingName(false)}
+              className="editable-input name-input"
+            />
+          ) : (
+            <div className="editable-display">
+              {name || "Ingresa tu nombre"}
+            </div>
+          )}
 
-        {/* Nombre editable */}
-        <input
-          type="text"
-          value={name}
-          onChange={handleNameChange}
-          className="editable-input name-input"
-        />
+          {/* Ubicación editable */}
+          {isEditingLocation ? (
+            <input
+              type="text"
+              value={location}
+              onChange={handleLocationChange}
+              onBlur={() => setIsEditingLocation(false)}
+              className="editable-input location-input"
+            />
+          ) : (
+            <div className="editable-display">
+              {location || "Ingresa tu ubicación"}
+            </div>
+          )}
+        </div>
 
-        {/* Ubicación editable */}
-        <input
-          type="text"
-          value={location}
-          onChange={handleLocationChange}
-          className="editable-input location-input"
-        />
+        {/* Botones para editar */}
+        <div className="edit-buttons-container">
+          <button onClick={() => setIsEditingName(true)} className="edit-button">Editar Nombre</button>
+          <button onClick={() => setIsEditingLocation(true)} className="edit-button">Editar Ubicación</button>
+        </div>
 
         <div className="tabs">
-          <a href="#posts">Publicaciones</a>
-          <a href="#bio" className="active">
+          <a href="#posts" onClick={() => setActiveTab("posts")}>Publicaciones</a>
+          <a href="#social" onClick={() => setActiveTab("social")}>Social</a>
+          <a href="#bio" className={activeTab === "bio" ? "active" : ""} onClick={() => setActiveTab("bio")}>
             Biografía
           </a>
-          <a href="#followers">Seguidores</a>
-          <a href="#following">Seguidos</a>
+          <a href="#followers" onClick={() => setActiveTab("followers")}>Seguidores</a>
+          <a href="#following" onClick={() => setActiveTab("following")}>Seguidos</a>
         </div>
-      </div>
+        <div className="tabs-line"></div> {/* Línea de color debajo de las pestañas */}
 
-      {/* Posts */}
-      <div className="posts-section">
-        <h3>Posts</h3>
-        <button onClick={handleAddPost} className="add-post-button">
-          + Añadir Post
-        </button>
-        <ul className="posts-list">
-          {posts.map((post, index) => (
-            <li key={index} className="post-item">
-              {post}
-            </li>
-          ))}
-        </ul>
+        {/* Contenido de las pestañas */}
+        {activeTab === "posts" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones */}
+        {activeTab === "social" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones en Social */}
+
+        {/* Sección de biografía más abajo */}
+        {activeTab === "bio" && (
+          <div className="bio-section">
+            {isEditingBio ? (
+              <>
+                <textarea
+                  value={bio}
+                  onChange={handleBioChange}
+                  placeholder="Escribe tu biografía aquí..."
+                  className="bio-input"
+                />
+                <button onClick={handleSaveBio} className="save-bio-button">
+                  Guardar Biografía
+                </button>
+              </>
+            ) : (
+              <div className="editable-display" onClick={handleEditBio}>
+                {bio}
+              </div>
+            )}
+          </div>
+        )}
       </div>
-      <Link to="/">Volver a Inicio</Link>
     </div>
   );
 };
 
 export default MyFeed;
+
+
