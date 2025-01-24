@@ -6,75 +6,52 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db, Users, Followers, Forums, Posts, Comments, Bans
+from api.models import db, User, Followers, Forum, Posts, Comments, Ban
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
-from flask_jwt_extended import JWTManager
 
 # from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
-static_file_dir = os.path.join(os.path.dirname(
-    os.path.realpath(__file__)), '../public/')
+static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
-
-#configuración para utilizar JWT(JSON Web Tokens) para autenticación (Aitor)
-app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY')
-jwt = JWTManager(app)
-
-
-
-# database condiguration
-db_url = os.getenv("DATABASE_URL")
-if db_url is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
-        "postgres://", "postgresql://")
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
-
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-MIGRATE = Migrate(app, db, compare_type=True)
+
+MIGRATE = Migrate(app, db)
 db.init_app(app)
 
-# add the admin
+# Setup the admin
 setup_admin(app)
 
-# add the admin
+# Setup commands
 setup_commands(app)
 
-# Add all endpoints form the API with a "api" prefix
+# Add the API endpoints
 app.register_blueprint(api, url_prefix='/api')
 
-# Handle/serialize errors like a JSON object
-
-
+# Handle errors
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
 
-# generate sitemap with all your endpoints
-
-
+# Generate sitemap
 @app.route('/')
 def sitemap():
-    if ENV == "development":
-        return generate_sitemap(app)
-    return send_from_directory(static_file_dir, 'index.html')
+    return generate_sitemap(app)
 
-# any other endpoint will try to serve it like a static file
+# Serve static files
 @app.route('/<path:path>', methods=['GET'])
-def serve_any_other_file(path):
+def serve_static(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
         path = 'index.html'
     response = send_from_directory(static_file_dir, path)
-    response.cache_control.max_age = 0  # avoid cache memory
     return response
 
-
-# this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=os.getenv('PORT', 3001), debug=os.getenv("FLASK_DEBUG") == "1")
