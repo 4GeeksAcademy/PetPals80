@@ -21,6 +21,9 @@ import { Register } from "./pages/Register.jsx";
 import { ForosGatos } from "./pages/ForosGatos.jsx"; 
 import { ForosPerros } from "./pages/ForosPerros.jsx";
 import { ForosRoedores } from "./pages/ForosRoedores.jsx";
+import { ForosAves} from "./pages/ForosAves.jsx";
+import { ForosArtropodos } from "./pages/ForosArtropodos.jsx";
+import { ForosReptiles } from "./pages/ForosReptiles.jsx";
 
 //create your first component
 const Layout = () => {
@@ -50,7 +53,9 @@ const Layout = () => {
                         <Route path="/foros-gatos" element={<ForosGatos />} /> 
                         <Route path="/foros-perros" element={<ForosPerros />} /> 
                         <Route path="/foros-roedores" element={<ForosRoedores />} /> 
-
+                        <Route path="/foros-artropodos" element={<ForosArtropodos />} /> 
+                        <Route path="/foros-aves" element={<ForosAves />} /> 
+                        <Route path="/foros-reptiles" element={<ForosReptiles />} /> 
 
                     </Routes>
                     <Footer />

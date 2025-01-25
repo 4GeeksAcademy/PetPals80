@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+.foros-artropodos-container {
+    position: relative;
+    padding: 40px 20;
+
+    margin: 0 auto;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden; 
+}
+
+
+/* Blue circle */
+.foros-artropodos-container::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background-color: #B5D1E2; 
+    border-radius: 50%;
+    z-index: -1;
+}
+
+/* Yellow rectangle */
+.foros-artropodos-container::after {
+    content: '';
+    position: absolute;
+    top: 200px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background-color: #FFF3CC; 
+    border-radius: 30px;
+    transform: rotate(-10deg);
+    z-index: -1;
+}
+
+/* Red line */
+.decorative-line-1 {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 150px;
+    height: 30px;
+    background-color: #FFB6C1;
+    transform: rotate(70deg);
+    z-index: -1;
+    border-radius: 15px;
+}
+
+/* Blue line */
+.decorative-line-2 {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 100px;
+    height: 30px;
+    background-color: #B5D1E2;
+    transform: rotate(70deg);
+    z-index: -1;
+    border-radius: 15px;
+}
+
+
+
+/* Main Content */
+.content-section {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.main-title {
+    font-size: 64px;
+    font-weight: bold;
+    color: #FFB6C1;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+.description-text {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Main Content Grid */
+.main-content-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.artropodos-image-section {
+    flex: 0 0 45%;
+    max-width: 450px;
+}
+
+.artropodos-image-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.artropodos-image {
+    width: 400px;
+    height: auto;
+    object-fit: contain;
+}
+
+.main-artropodos-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.artropodos-section-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+/* Categories Section */
+.categories-section {
+    flex: 0 0 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 20px;
+    margin-top: 120px; 
+    margin-right: 80px;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.category-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.member-count {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-content-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .categories-section {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .categories-section {
+        grid-template-columns: 1fr;
+    }
+
+    .artropodos-image {
+        width: 300px;
+    }
+}

@@ -56,12 +56,12 @@ export const Foros = () => {
     const navigate = useNavigate(); 
 
     const pets = [
-        { image: reptiles },
+        { image: reptiles, path: '/foros-reptiles' },
         { image: gatos, path: '/foros-gatos'},
         { image: perros, path: '/foros-perros'},
         { image: roedores, path: '/foros-roedores'},
-        { image: artropodos },
-        { image: aves }
+        { image: artropodos, path: '/foros-artropodos' },
+        { image: aves, path: '/foros-aves' }
     ];
 
     return (
