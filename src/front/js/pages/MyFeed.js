@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
+import { Publicaciones } from "./Publicaciones"; // Importar el nuevo componente
 
-export const MyFeed = () => {
+const MyFeed = () => {
   // Estados para los campos editables
   const [name, setName] = useState(() => localStorage.getItem("name") || "");
   const [location, setLocation] = useState(() => localStorage.getItem("location") || "");
   const [profileImage, setProfileImage] = useState(""); // Inicializar como cadena vacía
   const [bannerImage, setBannerImage] = useState("path-to-banner-image.jpg"); // Estado para la imagen del banner
   const [bio, setBio] = useState(() => localStorage.getItem("bio") || ""); // Estado para la biografía
-  const [posts, setPosts] = useState([]); // Estado para los posts, inicializado vacío
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
-  const [isAddingPost, setIsAddingPost] = useState(false); // Estado para mostrar el cuadro de añadir post
-  const [newPostContent, setNewPostContent] = useState(""); // Estado para el contenido del nuevo post
-  const [newPostImage, setNewPostImage] = useState(null); // Estado para la imagen del nuevo post
+  const [isEditingBio, setIsEditingBio] = useState(false); // Estado para editar la biografía
+  const [activeTab, setActiveTab] = useState("bio"); // Estado para la pestaña activa
+  const [posts, setPosts] = useState([]); // Estado para los posts, inicializado vacío
 
   useEffect(() => {
     if (!name) setIsEditingName(true);
@@ -45,24 +45,8 @@ export const MyFeed = () => {
     localStorage.setItem("bio", bio);
     alert("Biografía guardada");
   };
-  const handleAddPost = () => {
-    setIsAddingPost(true);
-  };
-  const handleSavePost = () => {
-    if (newPostContent || newPostImage) {
-      const newPost = { content: newPostContent, image: newPostImage };
-      setPosts([...posts, newPost]);
-      setNewPostContent("");
-      setNewPostImage(null);
-      setIsAddingPost(false);
-    }
-  };
-  const handleNewPostImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) setNewPostImage(URL.createObjectURL(file));
-  };
-  const handleDeletePost = (index) => {
-    setPosts(posts.filter((_, i) => i !== index));
+  const handleEditBio = () => {
+    setIsEditingBio(true);
   };
 
   return (
@@ -143,73 +127,47 @@ export const MyFeed = () => {
         </div>
 
         <div className="tabs">
-          <a href="#posts">Publicaciones</a>
-          <a href="#bio" className="active">
+          <a href="#posts" onClick={() => setActiveTab("posts")}>Publicaciones</a>
+          <a href="#social" onClick={() => setActiveTab("social")}>Social</a>
+          <a href="#bio" className={activeTab === "bio" ? "active" : ""} onClick={() => setActiveTab("bio")}>
             Biografía
           </a>
-          <a href="#followers">Seguidores</a>
-          <a href="#following">Seguidos</a>
+          <a href="#followers" onClick={() => setActiveTab("followers")}>Seguidores</a>
+          <a href="#following" onClick={() => setActiveTab("following")}>Seguidos</a>
         </div>
+        <div className="tabs-line"></div> {/* Línea de color debajo de las pestañas */}
 
-        {/* Cuadro de biografía */}
-        <div className="bio-section">
-          <textarea
-            value={bio}
-            onChange={handleBioChange}
-            placeholder="Escribe tu biografía aquí..."
-            className="bio-input"
-          />
-          <button onClick={handleSaveBio} className="save-bio-button">
-            Guardar Biografía
-          </button>
-        </div>
-      </div>
+        {/* Contenido de las pestañas */}
+        {activeTab === "posts" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones */}
+        {activeTab === "social" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones en Social */}
 
-      {/* Posts */}
-      <div className="posts-section">
-        <div className="posts-header">
-          <div className="posts-title">
-            <h3 className="posts-title-text">Posts</h3>
-            <button onClick={handleAddPost} className="add-post-button">
-              + Añadir Post
-            </button>
-          </div>
-          {isAddingPost && (
-            <div className="add-post-form">
-              <textarea
-                value={newPostContent}
-                onChange={(e) => setNewPostContent(e.target.value)}
-                placeholder="Escribe tu post aquí..."
-                className="new-post-input"
-              />
-              <input
-                type="file"
-                id="new-post-image-upload"
-                onChange={handleNewPostImageChange}
-                className="new-post-image-input"
-              />
-              <button onClick={handleSavePost} className="save-post-button">
-                Guardar Post
-              </button>
-            </div>
-          )}
-        </div>
-        <ul className="posts-list">
-          {posts.map((post, index) => (
-            <li key={index} className="post-item">
-              <div className="post-box">
-                {post.content}
-                {post.image && <img src={post.image} alt="Post" className="post-image" />}
-                <button onClick={() => handleDeletePost(index)} className="delete-post-button">
-                  Eliminar
+        {/* Sección de biografía más abajo */}
+        {activeTab === "bio" && (
+          <div className="bio-section">
+            {isEditingBio ? (
+              <>
+                <textarea
+                  value={bio}
+                  onChange={handleBioChange}
+                  placeholder="Escribe tu biografía aquí..."
+                  className="bio-input"
+                />
+                <button onClick={handleSaveBio} className="save-bio-button">
+                  Guardar Biografía
                 </button>
+              </>
+            ) : (
+              <div className="editable-display" onClick={handleEditBio}>
+                {bio}
               </div>
-            </li>
-          ))}
-        </ul>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+export default MyFeed;
 
 

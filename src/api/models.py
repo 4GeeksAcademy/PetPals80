@@ -3,6 +3,11 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
+
+
+
+
 # USER TABLE ------------------------------------------------------------
 class Users(db.Model):
     __tablename__ = 'users'
@@ -18,6 +23,7 @@ class Users(db.Model):
     bans = db.relationship('Bans', backref='user', lazy=True) #permite que múltiples Bans esten asociados a un único User
     followers = db.relationship( 'Followers', foreign_keys='Followers.follower_id', backref='follower', lazy='dynamic') #define relación entre Users y Followers
     followed = db.relationship( 'Followers', foreign_keys='Followers.followed_id', backref='followed', lazy='dynamic' )
+    images = db.relationship("Images", back_populates="user") #populates relación bidireccional con images
 
 
     def __repr__(self):
@@ -93,6 +99,7 @@ class Posts(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False) #cada Post esta asociada a un único User
     forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'), nullable=False) #cada Post esta asociada a un único Forum
     comments = db.relationship('Comments', backref='posts', lazy=True) # relación Forum(I) a Comments (II)
+    images = db.relationship("Images", back_populates="post") #populates relación bidireccional con images
 
     def serialize(self):
         return {
@@ -139,5 +146,32 @@ class Bans(db.Model):
             "reason": self.reason,
             "start_date": self.start_date.strftime('%Y-%m-%d %H:%M:%S'),
             "end_date": self.end_date.strftime('%Y-%m-%d %H:%M:%S') if self.end_date else None
+        }
+    
+
+# IMAGE TABLE ------------------------------------------------------------
+
+class Images(db.Model):
+    __tablename__ = 'images'
+    id = db.Column(db.Integer, primary_key=True)
+    filname = db.Column(db.String(250), nullable=False)
+    filepath = db.Column(db.String(250), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False) #cada imagen está asciada a un usuario
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id')) #cada imagen puede estar asociada a un único post
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    user = db.relationship("Users", back_populates="images") #populates relación bidireccional con users
+    post = db.relationship("Posts", back_populates="images") #populates relación bidireccional con posts
+
+    def __repr__(self):
+        return f'<Images {self.filname}>'
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "filname": self.filname,
+            "filepath": self.filepath,
+            "user_id": self.user_id,
+            "post_id": self.post_id,
+            "created_at": self.created_at
         }
 

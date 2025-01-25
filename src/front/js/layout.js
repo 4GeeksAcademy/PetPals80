@@ -7,7 +7,9 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-import { MyFeed } from "./pages/MyFeed";
+import MyFeed from "./pages/MyFeed"; // Importar el componente MyFeed
+import { Publicaciones } from "./pages/Publicaciones";
+
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -43,9 +45,13 @@ const Layout = () => {
 						<Route path="/login" element={<Login />} />
 						<Route path="/register" element={<Register />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
+                        <Route element={<Publicaciones />} path="/Publicaciones" />
+
                         <Route path="/foros-gatos" element={<ForosGatos />} /> 
                         <Route path="/foros-perros" element={<ForosPerros />} /> 
                         <Route path="/foros-roedores" element={<ForosRoedores />} /> 
+
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
@@ -55,4 +61,3 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
-
