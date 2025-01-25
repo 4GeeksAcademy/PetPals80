@@ -1,10 +1,13 @@
 import React from "react";
+
+import { useNavigate } from 'react-router-dom';
+
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css/autoplay';  
 import "swiper/css";
-import "../../styles/foros.css";
 
+import "../../styles/foros.css";
 
 import reptiles from "../../img/Reptiles.png";
 import gatos from "../../img/Gatos.png";
@@ -48,14 +51,17 @@ const SliderButtons = () => {
     );
 };
 
+
 export const Foros = () => {
+    const navigate = useNavigate(); 
+
     const pets = [
-        { image: reptiles, label: 'REPTILES' },
-        { image: gatos, label: 'GATOS' },
-        { image: perros, label: 'PERROS' },
-        { image: roedores, label: 'ROEDORES' },
-        { image: artropodos, label: 'ARTRÓPODOS' },
-        { image: aves, label: 'AVES' }
+        { image: reptiles },
+        { image: gatos, path: '/foros-gatos'},
+        { image: perros, path: '/foros-perros'},
+        { image: roedores, path: '/foros-roedores'},
+        { image: artropodos },
+        { image: aves }
     ];
 
     return (
@@ -84,9 +90,11 @@ export const Foros = () => {
                     <SliderButtons />
                     {pets.map((pet, i) => (
                         <SwiperSlide key={i}>
-                            <div className="pet-card">
-                                <img src={pet.image} alt={pet.label} />
-                                <span className="pet-label">{pet.label}</span>
+                            <div 
+                                className="pet-card"
+                                onClick={() => pet.path && navigate(pet.path)}
+                            >
+                                <img src={pet.image} alt="" />
                             </div>
                         </SwiperSlide>
                     ))}
