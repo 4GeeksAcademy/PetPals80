@@ -17,6 +17,8 @@ import { Login } from "./pages/Login.jsx";
 import { Register } from "./pages/Register.jsx";
 
 import { ForosGatos } from "./pages/ForosGatos.jsx"; 
+import { ForosPerros } from "./pages/ForosPerros.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -42,6 +44,7 @@ const Layout = () => {
 						<Route path="/register" element={<Register />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
                         <Route path="/foros-gatos" element={<ForosGatos />} /> 
+                        <Route path="/foros-perros" element={<ForosPerros />} /> 
                     </Routes>
                     <Footer />
                 </ScrollToTop>
