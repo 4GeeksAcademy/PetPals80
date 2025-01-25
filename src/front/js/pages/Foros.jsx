@@ -58,8 +58,8 @@ export const Foros = () => {
     const pets = [
         { image: reptiles },
         { image: gatos, path: '/foros-gatos'},
-        { image: perros, path: '/foros-perros' },
-        { image: roedores },
+        { image: perros, path: '/foros-perros'},
+        { image: roedores, path: '/foros-roedores'},
         { image: artropodos },
         { image: aves }
     ];
