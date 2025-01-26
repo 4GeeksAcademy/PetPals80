@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
+import Logo from "../../img/Logo.png";
 
-export const Navbar = () => {
+export const Navbar = (props) => {
 	return (
 	  <nav className="custom-navbar">
 		<div className="nav-background">
@@ -18,7 +19,9 @@ export const Navbar = () => {
 			  <Link to="/MyFeed">MY FEED</Link>
 			</li>
 			<li className="brand">
-			  <Link to="/login">PETPALS</Link>
+			  <Link to="/MyRegister">
+			  	<img src={Logo} alt="MyRegisterLogo" style={{width: '150px', height: '40px'}} />
+			  </Link>
 			</li>
 			<li>
 			  <Link to="/foros">FOROS</Link>

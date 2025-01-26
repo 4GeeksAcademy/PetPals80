@@ -9,6 +9,7 @@
 .auth-right {
     flex: 1;
     position: relative;
+    
 }
 
 .login-image {
@@ -45,3 +46,4 @@
     text-decoration: none;
     font-weight: 500;
 }
+
