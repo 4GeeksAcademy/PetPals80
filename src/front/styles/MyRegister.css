@@ -22,6 +22,8 @@ input.form-control.input_register {
     background: none; 
     border: none; 
     box-shadow: none;
+    width: 80%;
+    height: auto;
 }
 
 .auth-wrapper {
@@ -32,12 +34,26 @@ input.form-control.input_register {
     padding: 0;
 }
 
+/*Ajuste del Form*/
+.auth-form {
+    margin: 0;
+}
+
+/*Ajuste de imagen*/
+.auth-left {
+    display: flex;
+    justify-content:end; 
+    align-items: end;
+    height: 100%;
+    padding: 0;
+}
 
 .register-image {
-    width: 90%;
+    width: 70%;
     height: auto;
     object-fit: cover;
 }
+
 
 .form-register{
     background: none; 
@@ -117,8 +133,4 @@ input.form-control.input_register {
 
 .titulo_register {
     text-align: center;
-}
-
-.auth-left {
-    margin-right: 150px;
 }
