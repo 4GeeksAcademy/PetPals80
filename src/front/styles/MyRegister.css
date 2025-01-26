@@ -22,6 +22,8 @@ input.form-control.input_register {
     background: none; 
     border: none; 
     box-shadow: none;
+    width: 80%;
+    height: auto;
 }
 
 .auth-wrapper {
@@ -34,7 +36,7 @@ input.form-control.input_register {
 
 
 .register-image {
-    width: 90%;
+    width: 70%;
     height: auto;
     object-fit: cover;
 }
@@ -120,5 +122,5 @@ input.form-control.input_register {
 }
 
 .auth-left {
-    margin-right: 150px;
+    padding: 0;
 }
