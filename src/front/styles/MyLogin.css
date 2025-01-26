@@ -1,0 +1,106 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+
+
+.input_login {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    opacity: 50%;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.label-login {
+    font-family: "Lexend", serif;
+    font-weight: 500;
+}
+
+.auth-container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+}
+
+.auth-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.register-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.form-check {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+}
+
+.form-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.form-check label {
+    font-size: 0.9rem;
+    color: #666;
+    
+}
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-prompt {
+    color: #666;
+}
+
+.login-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.button-login {
+    background-color: rgb(177, 193, 229);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+}
+
+.titulo-login {
+    font-family:"Lexend", serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+.but-log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.span_register {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+}
+
+.register-link {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: rgb(177, 193, 229);
+}
+

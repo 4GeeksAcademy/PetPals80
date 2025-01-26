@@ -1,0 +1,124 @@
+
+
+input.form-control.input_register {
+    border-radius: 30px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    opacity: 50%;
+    padding: 8px;
+}
+
+
+.label_register {
+    font-family: "Lexend", serif;
+    font-weight: 500;
+    margin-left: 13px;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none; 
+    border: none; 
+    box-shadow: none;
+}
+
+.auth-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0;
+}
+
+
+.register-image {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+}
+
+.form-register{
+    background: none; 
+    border: none; 
+    box-shadow: none;
+}
+
+.form-check {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+}
+
+.form-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.form-check label {
+    font-size: 0.9rem;
+    color: #666;
+    
+}
+
+.link-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-prompt {
+    color: #666;
+}
+
+.login-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.registerButton {
+    background-color: rgb(177, 193, 229);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: white;
+}
+
+.Button_register {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%; 
+}
+
+.but-log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.span_register {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+}
+
+.register-link {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: rgb(177, 193, 229);
+}
+
+.titulo_register {
+    text-align: center;
+}
+
+.auth-left {
+    margin-right: 150px;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import "../../styles/auth.css";
 import "../../styles/register.css";
 import registerImage from "../../img/register-image.png";
@@ -41,3 +41,4 @@ export const Register = () => {
         </div>
     );
 };
+*/
