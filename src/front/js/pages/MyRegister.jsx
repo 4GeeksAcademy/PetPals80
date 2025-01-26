@@ -64,15 +64,15 @@ export const MyRegister = () => {
                                     </div>
                                     <div className="form-check">
                                         <input type="checkbox" id="terms" />
-                                        <label className='label_register' htmlFor="terms">I accept the privacy policy and terms of use.</label>
+                                        <label className='label_register' htmlFor="terms">He leído y acepto la Política de Privacidad</label>
                                     </div>
                                     <div className="Button_register">
                                         <button className='registerButton' type='submit' value="register" disabled={localStorage.getItem('token') ? true : false}>Register</button>
                                     </div>
                                     <div className="link-container">
                                         <div className="login-prompt">
-                                            <span className='span_register'>Already a member? </span>
-                                            <a href="/MyLogin" className="register-link">Sign In</a>
+                                            <span className='span_register'>¿Ya eres miembro? </span>
+                                            <a href="/MyLogin" className="register-link">Entrar</a>
                                         </div>
                                     </div>
                                 </form>
