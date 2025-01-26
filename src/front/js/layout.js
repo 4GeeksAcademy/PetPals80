@@ -12,11 +12,10 @@ import { Publicaciones } from "./pages/Publicaciones";
 
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
 import { Foros } from "./pages/Foros.jsx";
 import { About } from "./pages/About.jsx";
 import { Login } from "./pages/Login.jsx";
-import { Register } from "./pages/Register.jsx";
+import { MyRegister } from "./pages/MyRegister.jsx";
 
 import { ForosGatos } from "./pages/ForosGatos.jsx"; 
 import { ForosPerros } from "./pages/ForosPerros.jsx";
@@ -46,7 +45,7 @@ const Layout = () => {
                         <Route path="/foros" element={<Foros />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/login" element={<Login />} />
-						<Route path="/register" element={<Register />} />
+						<Route path="/MyRegister" element={<MyRegister />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
                         <Route element={<Publicaciones />} path="/Publicaciones" />
 
@@ -58,7 +57,6 @@ const Layout = () => {
                         <Route path="/foros-reptiles" element={<ForosReptiles />} /> 
 
                     </Routes>
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
