@@ -334,3 +334,54 @@ body {
 .delete-post-button:hover {
     text-decoration: underline; /* Añadir subrayado al pasar el ratón */
 }
+
+/* Estilos para la sección de mascotas */
+.pets-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pet-profile {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.pet-profile .profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-details h3,
+.pet-details p {
+  margin: 5px 0;
+}
+
+.delete-pet-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #a888ff;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+}
+
