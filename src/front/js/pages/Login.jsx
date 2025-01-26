@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/auth.css";
 import "../../styles/login.css";
-import loginImage from "../../img/login-image.png"; 
+import loginImage from "../../img/login-image.png";
 
 export const Login = () => {
     return (
@@ -31,7 +31,7 @@ export const Login = () => {
                     </div>
                 </div>
                 <div className="auth-right">
-                   <img src={loginImage} alt="Login Image" className="login-image" /> 
+                   <img src={loginImage} alt="Login Image" className="login-image" />
                 </div>
             </div>
         </div>
