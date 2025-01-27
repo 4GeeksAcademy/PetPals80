@@ -12,10 +12,10 @@ export const ForosReptiles = () => {
 
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍽️' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐱' },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🧶' },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '📝' }
+        { name: 'Alimento', members: '4504 Miembros', icon: '🥩' },
+        { name: 'Etología', members: '3365 Miembros', icon: '🦎' },
+        { name: 'Accesorios', members: '8554 Miembros', icon: '🌿' },
+        { name: 'Adiestramiento', members: '185 Miembros', icon: '📜' }
     ];
 
     return (
@@ -30,9 +30,7 @@ export const ForosReptiles = () => {
                 <h2 className="subtitle">/ REPTILIANA /</h2>
                 
                 <p className="description-text">
-                    Los gatos son adorables compañeros. Independientes pero cariñosos, disfrutan de jugar
-                    y explorar. Necesitan una buena alimentación, agua fresca, y rascadores para sus garras.
-                    ¡Estos peludos son pura alegría!
+                Los reptiles son mascotas fascinantes y tranquilas. Aunque no requieren tanta interacción como otros animales, es esencial proporcionarles un hábitat adecuado con temperatura y humedad controladas. Una alimentación apropiada y cuidados específicos garantizan su bienestar. ¡Son criaturas únicas que aportan serenidad al hogar!
                 </p>
             </div>
 

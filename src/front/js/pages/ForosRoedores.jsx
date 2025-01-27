@@ -12,12 +12,13 @@ export const ForosRoedores = () => {
 
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍽️' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐱' },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🧶' },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '📝' }
+        { name: 'Alimento', members: '4504 Miembros', icon: '🧀' },
+        { name: 'Etología', members: '3365 Miembros', icon: '🐭' },
+        { name: 'Accesorios', members: '8554 Miembros', icon: '🏠' },
+        { name: 'Adiestramiento', members: '185 Miembros', icon: '🔄' }
     ];
 
+    
     return (
         <div className="foros-roedores-container">
 
@@ -31,9 +32,7 @@ export const ForosRoedores = () => {
                 <h2 className="subtitle">/ MURINA /</h2>
                 
                 <p className="description-text">
-                    Los gatos son adorables compañeros. Independientes pero cariñosos, disfrutan de jugar
-                    y explorar. Necesitan una buena alimentación, agua fresca, y rascadores para sus garras.
-                    ¡Estos peludos son pura alegría!
+                Los roedores son pequeños y encantadores compañeros. Activos y curiosos, disfrutan explorando su entorno. Requieren una jaula limpia, una dieta balanceada y juguetes para mantener su mente y cuerpo activos. ¡Estos diminutos amigos aportan dinamismo y ternura a la vida diaria!
                 </p>
             </div>
 

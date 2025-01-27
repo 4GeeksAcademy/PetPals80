@@ -12,10 +12,10 @@ export const ForosAves = () => {
 
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍽️' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐱' },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🧶' },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '📝' }
+        { name: 'Alimento', members: '4504 Miembros', icon: '🌾' },
+        { name: 'Etología', members: '3365 Miembros', icon: '🐦' },
+        { name: 'Accesorios', members: '8554 Miembros', icon: '🪶' },
+        { name: 'Adiestramiento', members: '185 Miembros', icon: '🦜' }
     ];
 
     return (
@@ -30,9 +30,7 @@ export const ForosAves = () => {
                 <h2 className="subtitle">/ AVIAR /</h2>
                 
                 <p className="description-text">
-                    Los gatos son adorables compañeros. Independientes pero cariñosos, disfrutan de jugar
-                    y explorar. Necesitan una buena alimentación, agua fresca, y rascadores para sus garras.
-                    ¡Estos peludos son pura alegría!
+                Las aves son compañeras vibrantes y melodiosas. Muchas disfrutan de la interacción con sus cuidadores y pueden ser muy sociables. Necesitan una jaula espaciosa, una dieta variada y enriquecimiento ambiental para mantenerse saludables y felices. ¡Sus cantos y colores alegran cualquier espacio!
                 </p>
             </div>
 
