@@ -1,7 +1,136 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.cartel-bienvenida {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.welcome {
+    max-width: 35%;
+}  
+
+.intro {
+    font-family: "Lexend", serif;
+    text-align: center;
+    max-width: 50%; 
+    margin-top: 20px;
+}
+
+.registro {
+    background-color: rgb(177, 193, 229);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: white;
+    margin-right: 10px;
+}
+
+.entrar {
+    background-color: rgb(177, 193, 229);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: white;
+    margin-left: 10px;
+}
+
+.inicio-registro {
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Grupo de perros*/
+.recurso-perros {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 120px;
+}
+
+.recurso-home {
+    max-width: 50%;
+    width: 100%;
+    height: auto;
+}
+
+.personaliza {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+/*Beagle*/
+.personaliza-h5 {
+    flex: 1;
+    margin-left: 22%;
+    font-family: "Lexend", serif;
+    text-align: left;
+}
+
+.personaliza-cookie {
+    flex: 1;
+    max-width: 40%;
+    margin-right: 20%;
+}
+
+/*Conejo*/
+.captura-h5 {
+    flex: 1;
+    margin-right: 25%;
+    font-family: "Lexend", serif;
+    text-align: left;
+}
+
+.captura {
+    flex: 1;
+    max-width: 20%;
+    margin-left: 25%;
+}
+
+/*Gatuna*/
+.gatuna-h5 {
+    flex: 1;
+    margin-left: 22%;
+    font-family: "Lexend", serif;
+    text-align: left;
+}
+
+.gatuna {
+    flex: 1;
+    max-width: 30%;
+    margin-right: 20%;
+}
+
+/*Conocer*/
+.conocer-h5 {
+    flex: 1;
+    margin-right: 25%;
+    font-family: "Lexend", serif;
+    text-align: left;
+}
+
+.conocer {
+    flex: 1;
+    max-width: 30%;
+    margin-left: 25%;
+    margin-bottom: 80px;
+}
+
+.present {
+    margin-bottom: 80px;
+}
+
+.pregunta {
+    font-family: "Lexend", serif;
+    margin-bottom: 100px;
+}

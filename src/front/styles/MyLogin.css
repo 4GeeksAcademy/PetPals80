@@ -1,0 +1,106 @@
+input.form-control.input_login {
+    border-radius: 30px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    opacity: 50%;
+    padding: 8px;
+}
+
+/*Título Iniciar Sesión*/
+.titulo-login {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+.auth-wrapper-login {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px 0; 
+}
+
+.auth-container-login {
+    display: flex;
+    justify-content: top;
+    align-items: flex-start;
+    background: none;
+    border: none;
+    box-shadow: none;
+    max-width: 900px;
+    width: 100%;
+}
+
+.auth-left-login {
+    margin-top: -20px;
+}
+
+.Dog-Login {
+    height: 100%;
+    object-fit: cover;
+    width: 120%;
+    height: auto;
+    object-fit: cover;
+    margin-top: -80px;
+    margin-left: -50px;
+}
+
+/*Formulario*/
+.form-login {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+/*Labels*/
+.label-login {
+    font-family: 'Oswald', sans-serif;
+    margin-left: 10px;
+}
+
+/*Button Login*/
+.but-log {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.button-login {
+    background-color: rgb(177, 193, 229);
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    font-family: "Lexend", serif;
+    font-weight: 600;
+    color: white;
+}
+
+/*Links*/
+.register-prompt, .forgot-password {
+    font-family: "Lexend", serif;
+    font-weight: 600;
+}
+
+.auth-left-login, .auth-right-login {
+    flex: 1;
+}
+
+.auth-left-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-right-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo-login {
+    margin-bottom: 40px;
+}
