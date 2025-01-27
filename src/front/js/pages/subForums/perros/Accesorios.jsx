@@ -6,6 +6,7 @@ import perros from "../../../../img/Perros.png";
 const AccesoriosPerros = () => {
     const navigate = useNavigate();
 
+
     // Sample posts data
     const posts = [
         {
@@ -23,7 +24,6 @@ const AccesoriosPerros = () => {
        
     ];
 
-    
     return (
         <div className="subforum-page">
             {/* Main Content */}

@@ -50,16 +50,21 @@ export const ForosArtropodos = () => {
     </div>
 
     <div className="categories-section">
-        {categories.map((category, index) => (
-            <div key={index} className="category-card">
-                <div className="category-icon">{category.icon}</div>
-                <div className="category-info">
-                    <span className="category-name">/ {category.name} /</span>
-                    <span className="member-count">{category.members}</span>
-                </div>
+    {categories.map((category, index) => (
+        <div 
+            key={index} 
+            className="category-card"
+            onClick={() => navigate(`/foros-artropodos/${category.name.toLowerCase()}`)}
+            style={{ cursor: 'pointer' }}
+        >
+            <div className="category-icon">{category.icon}</div>
+            <div className="category-info">
+                <span className="category-name">/ {category.name} /</span>
+                <span className="member-count">{category.members}</span>
             </div>
-        ))}
-    </div>
+        </div>
+    ))}
+</div>
 </div>
         </div>
     );
