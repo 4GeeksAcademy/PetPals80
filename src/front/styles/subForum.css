@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+
 .subforum-page {
     max-width: 1200px;
     margin: 0 auto;
@@ -34,6 +36,9 @@
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 40px;
+    font-family: 'Oswald', sans-serif;  
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 /* Posts List */

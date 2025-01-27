@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import "../../../../styles/subForum.css";
+import gatos from "../../../../img/Gatos.png";
 
 const CuidadosGatos = () => {
     const navigate = useNavigate();
@@ -19,15 +20,29 @@ const CuidadosGatos = () => {
             time: "12:05",
             content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore"
         },
-        // Add more sample posts as needed
+       
     ];
 
+    
     return (
         <div className="subforum-page">
-
             {/* Main Content */}
             <div className="subforum-content">
-                <h1 className="forum-title">¡ GATOS !</h1>
+                {/* Added image section */}
+                <div className="forum-image">
+                    <img 
+                        src={gatos} 
+                        alt="Gatos" 
+                        className="cats-image"
+                        style={{ 
+                            width: '200px',  
+                            display: 'block',
+                            margin: '0 auto 20px auto'
+                        }} 
+                    />
+                </div>
+                
+                <h1 className="forum-title">CUIDADOS</h1>
 
                 {/* Posts List */}
                 <div className="posts-list">

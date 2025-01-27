@@ -13,7 +13,7 @@ export const ForosAves = () => {
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
         { name: 'Alimento', members: '4504 Miembros', icon: '🌾' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐦' },
+        { name: 'Etologia', members: '3365 Miembros', icon: '🐦' },
         { name: 'Accesorios', members: '8554 Miembros', icon: '🪶' },
         { name: 'Adiestramiento', members: '185 Miembros', icon: '🦜' }
     ];

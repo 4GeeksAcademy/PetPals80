@@ -13,7 +13,7 @@ export const ForosPerros = () => {
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
         { name: 'Alimento', members: '4504 Miembros', icon: '🍖' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐶' },
+        { name: 'Etologia', members: '3365 Miembros', icon: '🐶' },
         { name: 'Accesorios', members: '8554 Miembros', icon: '🦴' },
         { name: 'Adiestramiento', members: '185 Miembros', icon: '🦮' }
     ];
@@ -51,16 +51,21 @@ export const ForosPerros = () => {
     </div>
 
     <div className="categories-section">
-        {categories.map((category, index) => (
-            <div key={index} className="category-card">
-                <div className="category-icon">{category.icon}</div>
-                <div className="category-info">
-                    <span className="category-name">/ {category.name} /</span>
-                    <span className="member-count">{category.members}</span>
-                </div>
+    {categories.map((category, index) => (
+        <div 
+            key={index} 
+            className="category-card"
+            onClick={() => navigate(`/foros-perros/${category.name.toLowerCase()}`)}
+            style={{ cursor: 'pointer' }}
+        >
+            <div className="category-icon">{category.icon}</div>
+            <div className="category-info">
+                <span className="category-name">/ {category.name} /</span>
+                <span className="member-count">{category.members}</span>
             </div>
-        ))}
-    </div>
+        </div>
+    ))}
+</div>
 </div>
         </div>
     );
