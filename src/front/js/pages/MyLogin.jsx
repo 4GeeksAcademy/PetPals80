@@ -13,10 +13,18 @@ export const MyLogin = () => {
 /*Login Required----------------------------------*/
     
     const [loginFormData, setLoginFormData] = useState({ email: '', password: '' });
+   
     const handleLoginChange = e => setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
-    const handleLoginSubmit = e => {
+   
+    const handleLoginSubmit = async (e) => { 
         e.preventDefault();
-        if (actions.login(loginFormData)) navigate('/MyFeed');
+        
+        const success = await actions.login(loginFormData);
+        if (success) {
+            navigate("/MyFeed");
+        } else {
+            alert("Credenciales Incorrectos, inténtelo de nuevo");
+        }
     };
 
     return (
