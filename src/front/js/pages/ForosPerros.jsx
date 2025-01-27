@@ -12,10 +12,10 @@ export const ForosPerros = () => {
 
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍽️' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐱' },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🧶' },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '📝' }
+        { name: 'Alimento', members: '4504 Miembros', icon: '🍖' },
+        { name: 'Etología', members: '3365 Miembros', icon: '🐶' },
+        { name: 'Accesorios', members: '8554 Miembros', icon: '🦴' },
+        { name: 'Adiestramiento', members: '185 Miembros', icon: '🦮' }
     ];
 
     return (
@@ -31,9 +31,7 @@ export const ForosPerros = () => {
                 <h2 className="subtitle">/ PERRUNA /</h2>
                 
                 <p className="description-text">
-                    Los gatos son adorables compañeros. Independientes pero cariñosos, disfrutan de jugar
-                    y explorar. Necesitan una buena alimentación, agua fresca, y rascadores para sus garras.
-                    ¡Estos peludos son pura alegría!
+                Los perros son leales y afectuosos compañeros. Disfrutan de la compañía humana y son conocidos por su fidelidad. Necesitan ejercicio regular, una dieta equilibrada y atención veterinaria periódica. ¡Estos amigos de cuatro patas llenan de alegría nuestros hogares!
                 </p>
             </div>
 

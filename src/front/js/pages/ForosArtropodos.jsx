@@ -12,10 +12,10 @@ export const ForosArtropodos = () => {
 
     const categories = [
         { name: 'Cuidados', members: '567 Miembros', icon: '🏥' },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍽️' },
-        { name: 'Etología', members: '3365 Miembros', icon: '🐱' },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🧶' },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '📝' }
+        { name: 'Alimento', members: '4504 Miembros', icon: '🍃' },
+        { name: 'Etología', members: '3365 Miembros', icon: '🕷️' },
+        { name: 'Accesorios', members: '8554 Miembros', icon: '🕸️' },
+        { name: 'Adiestramiento', members: '185 Miembros', icon: '🔍' }
     ];
 
     return (
@@ -30,9 +30,7 @@ export const ForosArtropodos = () => {
                 <h2 className="subtitle">/ ARTRÓPODA /</h2>
                 
                 <p className="description-text">
-                    Los gatos son adorables compañeros. Independientes pero cariñosos, disfrutan de jugar
-                    y explorar. Necesitan una buena alimentación, agua fresca, y rascadores para sus garras.
-                    ¡Estos peludos son pura alegría!
+                Los artrópodos, como ciertas especies de insectos y arácnidos, son mascotas exóticas y de bajo mantenimiento. Es crucial investigar las necesidades específicas de cada especie, incluyendo su alimentación y hábitat. Aunque no son animales para interactuar físicamente, observar su comportamiento puede ser muy gratificante. ¡Son seres intrigantes que aportan una perspectiva diferente de la naturaleza!
                 </p>
             </div>
 

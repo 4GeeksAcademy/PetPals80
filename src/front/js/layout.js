@@ -25,6 +25,13 @@ import { ForosAves} from "./pages/ForosAves.jsx";
 import { ForosArtropodos } from "./pages/ForosArtropodos.jsx";
 import { ForosReptiles } from "./pages/ForosReptiles.jsx";
 
+
+import CuidadosGatos from "./pages/subForums/gatos/Cuidados.jsx";
+import AlimentoGatos from "./pages/subForums/gatos/Alimento.jsx";
+import EtologiaGatos from "./pages/subForums/gatos/Etologia.jsx";
+import AccesoriosGatos from "./pages/subForums/gatos/Accesorios.jsx";
+import AdiestramientoGatos from "./pages/subForums/gatos/Adiestramiento.jsx";
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -51,6 +58,12 @@ const Layout = () => {
                         <Route element={<Publicaciones />} path="/Publicaciones" />
 
                         <Route path="/foros-gatos" element={<ForosGatos />} /> 
+                            <Route path="/foros-gatos/cuidados" element={<CuidadosGatos />} />
+                            <Route path="/foros-gatos/alimento" element={<AlimentoGatos />} />
+                            <Route path="/foros-gatos/etologia" element={<EtologiaGatos />} />
+                            <Route path="/foros-gatos/accesorios" element={<AccesoriosGatos />} />
+                            <Route path="/foros-gatos/adiestramiento" element={<AdiestramientoGatos />} />
+
                         <Route path="/foros-perros" element={<ForosPerros />} /> 
                         <Route path="/foros-roedores" element={<ForosRoedores />} /> 
                         <Route path="/foros-artropodos" element={<ForosArtropodos />} /> 
