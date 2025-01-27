@@ -12,6 +12,9 @@ import { Publicaciones } from "./pages/Publicaciones";
 
 
 import { Navbar } from "./component/navbar";
+
+import { Footer } from "./component/footer.js";
+
 import { Foros } from "./pages/Foros.jsx";
 import { About } from "./pages/About.jsx";
 import { Login } from "./pages/Login.jsx";
