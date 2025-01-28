@@ -86,3 +86,33 @@
     line-height: 1.6;
     color: #333;
 }
+
+.post-form {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+.post-input {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.post-submit-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.post-submit-btn:hover {
+    background: #0056b3;
+}
