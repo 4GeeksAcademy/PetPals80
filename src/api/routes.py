@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, Blueprint
-from api.models import db, Users, Forums, Followers, Bans, Posts, Comments
+from api.models import db, Users, Forums, Followers, Bans, Posts, Comments, Favorites
 from api.utils import APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -265,10 +265,6 @@ def new_comment():
 
 
 
-
-
-
-
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
     """
@@ -291,3 +287,223 @@ def handle_hello():
         return jsonify(response_body), 200
     except Exception as e:
         raise APIException(f"An unexpected error occurred: {str(e)}", status_code=500)
+
+
+
+#SGC ADDED ROUTES
+
+@api.route('/setup-forums', methods=['POST'])
+def setup_forums():
+    try:
+        admin_user = Users.query.first()
+        if not admin_user:
+            return jsonify({"error": "Create a user first"}), 400
+
+        forums = [
+    
+    {"id": 1, "title": "Accesorios - Perros"},
+    {"id": 2, "title": "Adiestramiento - Perros"},
+    {"id": 3, "title": "Alimento - Perros"},
+    {"id": 4, "title": "Cuidados - Perros"},
+    {"id": 5, "title": "Etologia - Perros"},
+    
+    {"id": 6, "title": "Accesorios - Gatos"},
+    {"id": 7, "title": "Adiestramiento - Gatos"},
+    {"id": 8, "title": "Alimento - Gatos"},
+    {"id": 9, "title": "Cuidados - Gatos"},
+    {"id": 10, "title": "Etologia - Gatos"},
+    
+    {"id": 11, "title": "Accesorios - Aves"},
+    {"id": 12, "title": "Adiestramiento - Aves"},
+    {"id": 13, "title": "Alimento - Aves"},
+    {"id": 14, "title": "Cuidados - Aves"},
+    {"id": 15, "title": "Etologia - Aves"},
+    
+    {"id": 16, "title": "Accesorios - Artropodos"},
+    {"id": 17, "title": "Adiestramiento - Artropodos"},
+    {"id": 18, "title": "Alimento - Artropodos"},
+    {"id": 19, "title": "Cuidados - Artropodos"},
+    {"id": 20, "title": "Etologia - Artropodos"},
+    
+    {"id": 21, "title": "Accesorios - Reptiles"},
+    {"id": 22, "title": "Adiestramiento - Reptiles"},
+    {"id": 23, "title": "Alimento - Reptiles"},
+    {"id": 24, "title": "Cuidados - Reptiles"},
+    {"id": 25, "title": "Etologia - Reptiles"},
+    
+    {"id": 26, "title": "Accesorios - Roedores"},
+    {"id": 27, "title": "Adiestramiento - Roedores"},
+    {"id": 28, "title": "Alimento - Roedores"},
+    {"id": 29, "title": "Cuidados - Roedores"},
+    {"id": 30, "title": "Etologia - Roedores"}
+        ]
+
+        created_forums = []
+        for forum in forums:
+            if not Forums.query.get(forum["id"]):
+                new_forum = Forums(
+                    id=forum["id"],
+                    title=forum["title"],
+                    user_id=admin_user.id
+                )
+                db.session.add(new_forum)
+                created_forums.append(forum["title"])
+        
+        db.session.commit()
+        return jsonify({
+            "message": "Forums created",
+            "created": created_forums
+        }), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+    
+
+
+@api.route('/forums/<int:forum_id>/posts', methods=['GET'])
+def get_forum_posts(forum_id):
+    try:
+        # Check if forum exists
+        forum = Forums.query.get(forum_id)
+        if not forum:
+            return jsonify({"error": "Forum not found"}), 404
+            
+        # Get all posts for this forum
+        posts = Posts.query.filter_by(forum_id=forum_id).order_by(Posts.created_at.desc()).all()
+        posts_list = [post.serialize() for post in posts]
+        
+        return jsonify(posts_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+
+
+@api.route('/forums/<int:forum_id>/posts', methods=['POST'])
+@jwt_required()
+def create_forum_post(forum_id):
+    try:
+        # Get current user from JWT token
+        current_user_id = get_jwt_identity()
+        
+        # Get data from request
+        data = request.json
+        if 'content' not in data:
+            return jsonify({"error": "Content is required"}), 400
+            
+        # Check if forum exists
+        forum = Forums.query.get(forum_id)
+        if not forum:
+            return jsonify({"error": "Forum not found"}), 404
+            
+        # Create new post
+        new_post = Posts(
+            content=data['content'],
+            user_id=current_user_id,
+            forum_id=forum_id
+        )
+        
+        db.session.add(new_post)
+        db.session.commit()
+        
+        return jsonify(new_post.serialize()), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+    
+
+    
+@api.route('/posts/<int:post_id>/comments', methods=['POST'])
+@jwt_required()
+def create_post_comment(post_id):
+    try:
+        current_user_id = get_jwt_identity()
+        data = request.json
+        
+        post = Posts.query.get(post_id)
+        if not post:
+            return jsonify({"error": "Post not found"}), 404
+            
+        new_comment = Comments(
+            content=data['content'],
+            post_id=post_id,
+            user_id=current_user_id,
+            forum_id=post.forum_id
+        )
+        
+        db.session.add(new_comment)
+        db.session.commit()
+        
+        return jsonify({"message": "Comment created"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+    
+
+
+@api.route('/posts/<int:post_id>/comments', methods=['GET'])
+def get_post_comments(post_id):
+    try:
+        comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.created_at.desc()).all()
+        comments_list = [comment.serialize() for comment in comments]
+        return jsonify(comments_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+    
+
+
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def get_favorites():
+    try:
+        current_user_id = get_jwt_identity()
+        favorites = Favorites.query.filter_by(user_id=current_user_id).all()
+        forums = [Forums.query.get(f.forum_id) for f in favorites]
+        return jsonify([forum.serialize() for forum in forums if forum]), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+
+@api.route('/forums/<int:forum_id>/favorite', methods=['POST'])
+@jwt_required()
+def add_favorite(forum_id):
+    try:
+        current_user_id = get_jwt_identity()
+        
+        # Check if already in favorites
+        existing = Favorites.query.filter_by(
+            user_id=current_user_id,
+            forum_id=forum_id
+        ).first()
+        
+        if existing:
+            return jsonify({"message": "Forum already in favorites"}), 200
+            
+        new_favorite = Favorites(
+            user_id=current_user_id,
+            forum_id=forum_id
+        )
+        db.session.add(new_favorite)
+        db.session.commit()
+        return jsonify({"message": "Forum added to favorites"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+
+
+
+@api.route('/forums/<int:forum_id>/favorite', methods=['DELETE'])
+@jwt_required()
+def remove_favorite(forum_id):
+    try:
+        current_user_id = get_jwt_identity()
+        Favorites.query.filter_by(
+            user_id=current_user_id,
+            forum_id=forum_id
+        ).delete()
+        db.session.commit()
+        return jsonify({"message": "Forum removed from favorites"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+

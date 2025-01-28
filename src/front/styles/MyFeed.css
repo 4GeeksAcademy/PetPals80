@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -73,6 +73,7 @@ body {
 .profile-section {
     text-align: center;
     margin: 20px 0;
+    font-family: 'Oswald', sans-serif;
 }
 
 .profile-section .profile-image {
@@ -161,48 +162,89 @@ body {
 }
 
 .edit-button {
-    background-color: transparent;
-    color: #F7BED1;
+    background-color: #F7BED1; /* Cambiar el color de fondo */
+    color: white;
     border: none;
+    padding: 2px 5px; /* Hacer los botones más pequeños */
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    margin-left: 5px;
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    margin-top: 5px; /* Reducir el margen superior */
 }
 
 .edit-button:hover {
-    text-decoration: underline;
+    background-color: #E6A8B8; /* Color de fondo al pasar el ratón */
 }
 
 .name-location-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     margin-top: 10px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    padding-inline: 669px;
+    font-family: 'Oswald', sans-serif;
 }
 
 .edit-buttons-container {
     margin-top: 10px;
+    font-family: 'Oswald', sans-serif;
 }
 
 .profile-image-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    width: 150px;
+    height: 150px;
+    margin: 0px auto;
+    border-style: dotted;
+    border-radius: 74px;
+    border-color: lavender;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .placeholder-image {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    border: 2px solid #ddd;
     background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.change-image-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #F7BED1;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .tabs a {
     color: #CBCBE7;
     margin: 0 15px;
     text-decoration: none;
+    font-family: 'Oswald', sans-serif;
 }
 
 .tabs a.active {
@@ -334,3 +376,340 @@ body {
 .delete-post-button:hover {
     text-decoration: underline; /* Añadir subrayado al pasar el ratón */
 }
+
+/* Estilos para la sección de mascotas */
+.pets-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pet-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  position: relative;
+  box-sizing: border-box; /* Asegurarse de que el padding y el borde se incluyan en el tamaño total */
+}
+
+.pet-details-container {
+  display: flex;
+  width: 100%;
+}
+
+.image-container {
+  position: relative;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e0e0e0; /* Añadir un color de fondo para el placeholder */
+}
+
+.change-image-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.change-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.bio-image-container {
+  position: relative;
+  margin-top: 10px;
+}
+
+.bio-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #e0e0e0; /* Añadir un color de fondo para el placeholder */
+}
+
+.change-bio-image-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.change-bio-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px; /* Añadir margen a la izquierda para separar de la imagen */
+  flex: 1; /* Permitir que los detalles ocupen el espacio restante */
+}
+
+.pet-details h3,
+.pet-details p {
+  margin: 0;
+}
+
+.pet-bio {
+  margin-top: 10px; /* Añadir margen superior para separar de los detalles */
+  width: 100%;
+  word-wrap: break-word; /* Asegurarse de que el texto se ajuste dentro del contenedor */
+}
+
+.pet-profile .profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-details h3,
+.pet-details p {
+  margin: 5px 0;
+}
+
+.delete-pet-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #a888ff;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Estilos para el formulario de agregar mascota */
+.add-pet-form {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.add-pet-form .profile-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.add-pet-form .profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.add-pet-form .change-image-button {
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-pet-form .change-image-button:hover {
+  background-color: #F7BED1;
+}
+
+.add-pet-form .pet-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.add-pet-form .pet-details input,
+.add-pet-form .pet-details textarea {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-pet-form .pet-details textarea {
+  resize: none;
+}
+
+.add-pet-form .save-bio-button {
+  align-self: center;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-pet-form .save-bio-button:hover {
+  background-color: #F7BED1;
+}
+
+.editable-input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bio-input {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.save-bio-button {
+  align-self: center;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.save-bio-button:hover {
+  background-color: #F7BED1;
+}
+
+/* ...existing code... */
+
+.profile-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px; /* Asegurar el mismo tamaño para el contenedor */
+  height: 150px; /* Asegurar el mismo tamaño para el contenedor */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.placeholder-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #ccc;
+}
+
+.change-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 2px 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.name-location-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.edit-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 1px;
+    margin-bottom: 25px;
+}
+
+
+.editable-input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.name-input {
+  font-size: 16px;
+}
+
+.location-input {
+  font-size: 16px;
+}
+
+.edit-button {
+  background-color: #F7BED1; /* Cambiar el color de fondo */
+  color: white;
+  border: none;
+  padding: 2px 5px; /* Hacer los botones más pequeños */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px; /* Reducir el tamaño de la fuente */
+  margin-top: 5px; /* Reducir el margen superior */
+}
+
+.edit-button:hover {
+  background-color: #E6A8B8; /* Color de fondo al pasar el ratón */
+}
+
+/* ...existing code... */
