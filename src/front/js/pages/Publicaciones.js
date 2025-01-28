@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
 
@@ -75,4 +74,3 @@ export const Publicaciones = ({ posts, setPosts }) => {
     </div>
   );
 };
-
