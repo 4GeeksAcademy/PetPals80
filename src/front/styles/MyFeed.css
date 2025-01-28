@@ -300,20 +300,29 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 8px;
-    font-size: 16px;
+    font-size: 15px;
     font-family: Arial, sans-serif;
     margin: 0 auto 10px auto; /* Centrar y añadir margen inferior */
+}
+
+.bio-text {
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+  margin: 10px auto;
+  width: 39%;
+  text-align: center;
 }
 
 .save-bio-button {
     background-color: #BBDFD3;
     color: #fff;
     border: none;
-    padding: 5px 10px;
+    padding: 3px 6px;
     cursor: pointer;
     border-radius: 5px;
     display: block; /* Convertir en bloque para centrar */
     margin: 0 auto; /* Centrar horizontalmente */
+    font-size: 17px; /* Reducir el tamaño del texto */
 }
 
 .save-bio-button:hover {

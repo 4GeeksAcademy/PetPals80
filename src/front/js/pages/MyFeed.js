@@ -212,17 +212,12 @@ const MyFeed = () => {
         <div className="tabs">
           <a href="#posts" onClick={() => setActiveTab("posts")}>Publicaciones</a>
           <a href="#social" onClick={() => setActiveTab("social")}>Social</a>
-          <a href="#bio" className={activeTab === "bio" ? "active" : ""} onClick={() => setActiveTab("bio")}>
-            Biografía
-          </a>
+          <a href="#bio" onClick={() => setActiveTab("bio")}>Biografía</a>
           <a href="#followers" onClick={() => setActiveTab("followers")}>Seguidores</a>
           <a href="#following" onClick={() => setActiveTab("following")}>Seguidos</a>
         </div>
         <div className="tabs-line"></div> {/* Línea de color debajo de las pestañas */}
 
-        {/* Contenido de las pestañas */}
-        {activeTab === "posts" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones */}
-        {activeTab === "social" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones en Social */}
 
         {/* Sección de biografía más abajo */}
         {activeTab === "bio" && (
@@ -241,11 +236,17 @@ const MyFeed = () => {
                   </button>
                 </div>
               ) : (
-                <div onClick={handleEditBio}>
-                  <p>{bio}</p>
-                </div>
-              )}
-            </div>
+                <div>
+                <p className="bio-text">{bio}</p>
+                <button onClick={handleEditBio} className="save-bio-button">
+                  Editar Biografía
+                </button>
+              </div>
+            )}
+          </div>
+      
+        
+          
             {/* Botón para agregar mascota */}
             <button onClick={handleAddPet} className="save-bio-button">Agregar Mascota</button>
 
