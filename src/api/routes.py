@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, Blueprint
-from api.models import db, Users, Forums, Followers, Bans, Posts, Comments
+from api.models import db, Users, Forums, Followers, Bans, Posts, Comments, Favorites
 from api.utils import APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -439,6 +439,7 @@ def create_post_comment(post_id):
         return jsonify({"error": str(e)}), 400
     
 
+
 @api.route('/posts/<int:post_id>/comments', methods=['GET'])
 def get_post_comments(post_id):
     try:
@@ -447,3 +448,62 @@ def get_post_comments(post_id):
         return jsonify(comments_list), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+
+
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def get_favorites():
+    try:
+        current_user_id = get_jwt_identity()
+        favorites = Favorites.query.filter_by(user_id=current_user_id).all()
+        forums = [Forums.query.get(f.forum_id) for f in favorites]
+        return jsonify([forum.serialize() for forum in forums if forum]), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+
+@api.route('/forums/<int:forum_id>/favorite', methods=['POST'])
+@jwt_required()
+def add_favorite(forum_id):
+    try:
+        current_user_id = get_jwt_identity()
+        
+        # Check if already in favorites
+        existing = Favorites.query.filter_by(
+            user_id=current_user_id,
+            forum_id=forum_id
+        ).first()
+        
+        if existing:
+            return jsonify({"message": "Forum already in favorites"}), 200
+            
+        new_favorite = Favorites(
+            user_id=current_user_id,
+            forum_id=forum_id
+        )
+        db.session.add(new_favorite)
+        db.session.commit()
+        return jsonify({"message": "Forum added to favorites"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+
+
+
+@api.route('/forums/<int:forum_id>/favorite', methods=['DELETE'])
+@jwt_required()
+def remove_favorite(forum_id):
+    try:
+        current_user_id = get_jwt_identity()
+        Favorites.query.filter_by(
+            user_id=current_user_id,
+            forum_id=forum_id
+        ).delete()
+        db.session.commit()
+        return jsonify({"message": "Forum removed from favorites"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+
