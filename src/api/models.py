@@ -7,7 +7,6 @@ db = SQLAlchemy()
 
 
 
-
 # USER TABLE ------------------------------------------------------------
 class Users(db.Model):
     __tablename__ = 'users'
@@ -106,6 +105,7 @@ class Posts(db.Model):
             "id": self.id,
             "forum_id": self.forum_id,
             "user_id": self.user_id,
+            "username": self.users.username if self.users else "Unknown User",  #SGC ADDED USERNAME
             "content": self.content,
             "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
