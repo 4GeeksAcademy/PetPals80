@@ -106,9 +106,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+		
+
+
+			
+			/* SGC ADDED */
+			    // Get posts for a specific forum
+				getForumPosts: async (forumId) => {
+					try {
+						const resp = await fetch(process.env.BACKEND_URL + `/api/forums/${forumId}/posts`, {
+							headers: {
+								'Authorization': `Bearer ${localStorage.getItem('token')}`
+							}
+						});
+						if (!resp.ok) throw new Error('Failed to fetch posts');
+						const data = await resp.json();
+						setStore({ currentForumPosts: data });
+						return data;
+					} catch (error) {
+						console.error('Error loading posts:', error);
+						return null;
+					}
+				},
+				
+				
+				createForumPost: async (forumId, content) => {
+					try {
+						const resp = await fetch(process.env.BACKEND_URL + `/api/forums/${forumId}/posts`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': `Bearer ${localStorage.getItem('token')}`
+							},
+							body: JSON.stringify({ content })
+						});
+						if (!resp.ok) throw new Error('Failed to create post');
+						const data = await resp.json();
+						
+						// Refresh posts after creating new one
+						getActions().getForumPosts(forumId);
+						return true;
+					} catch (error) {
+						console.error('Error creating post:', error);
+						return false;
+					}
+				}
 		}
 	};
 };
 
 export default getState;
+

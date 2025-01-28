@@ -1,34 +1,57 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Context } from "../../../store/appContext";
 import "../../../../styles/subForum.css";
 import perros from "../../../../img/Perros.png";
 
+import { FORUM_IDS } from "../forumIds";
+
+
 const AccesoriosPerros = () => {
+    const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const [newPost, setNewPost] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    const FORUM_ID = FORUM_IDS.PERROS.ACCESORIOS;
 
-    // Sample posts data
-    const posts = [
-        {
-            id: 1,
-            username: "ElPepe_55",
-            time: "15:02",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod magna aliqua. Ut enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit laboris nisi ut aliquip ex ea commodo consequat. Dougiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit nunc vel feugiat nulla facilisis."
-        },
-        {
-            id: 2,
-            username: "Latula_92",
-            time: "12:05",
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore"
-        },
-       
-    ];
+    // Fetch posts when component mounts
+    useEffect(() => {
+        loadPosts();
+    }, []);
+
+    const loadPosts = async () => {
+        setIsLoading(true);
+        const posts = await actions.getForumPosts(FORUM_ID);
+        setIsLoading(false);
+        if (!posts) {
+            setError("Error loading posts. Please try again.");
+        }
+    };
+
+    const handleSubmitPost = async (e) => {
+        e.preventDefault();
+        if (!newPost.trim()) return;
+
+        // Check if user is logged in
+        if (!localStorage.getItem('token')) {
+            navigate('/login');
+            return;
+        }
+
+        const success = await actions.createForumPost(FORUM_ID, newPost);
+        if (success) {
+            setNewPost("");
+            await loadPosts();
+        } else {
+            setError("Error creating post. Please try again.");
+        }
+    };
 
     return (
         <div className="subforum-page">
-            {/* Main Content */}
             <div className="subforum-content">
-                {/* Added image section */}
                 <div className="forum-image">
                     <img 
                         src={perros} 
@@ -44,22 +67,53 @@ const AccesoriosPerros = () => {
                 
                 <h1 className="forum-title">Accesorios</h1>
 
-                {/* Posts List */}
+                {error && (
+                    <div className="alert alert-danger" role="alert">
+                        {error}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmitPost} className="post-form">
+                    <textarea
+                        value={newPost}
+                        onChange={(e) => setNewPost(e.target.value)}
+                        placeholder={localStorage.getItem('token') ? 
+                            "Write your post here..." : 
+                            "Please log in to post"}
+                        className="post-input"
+                    />
+                    <button 
+                        type="submit" 
+                        className="btn btn-primary"
+                        disabled={!newPost.trim() || !localStorage.getItem('token')}
+                    >
+                        Post
+                    </button>
+                </form>
+
                 <div className="posts-list">
-                    {posts.map((post) => (
-                        <div key={post.id} className="post-card">
-                            <div className="post-header">
-                                <div className="user-info">
-                                    <div className="user-avatar"></div>
-                                    <span className="username">{post.username}</span>
+                    {isLoading ? (
+                        <div>Loading posts...</div>
+                    ) : store.currentForumPosts?.length === 0 ? (
+                        <div>No posts yet. Be the first to post!</div>
+                    ) : (
+                        store.currentForumPosts?.map((post) => (
+                            <div key={post.id} className="post-card">
+                                <div className="post-header">
+                                    <div className="user-info">
+                                        <div className="user-avatar"></div>
+                                        <span className="username">{post.username}</span>
+                                    </div>
+                                    <span className="post-time">
+                                        {new Date(post.created_at).toLocaleString()}
+                                    </span>
                                 </div>
-                                <span className="post-time">{post.time}</span>
+                                <div className="post-content">
+                                    {post.content}
+                                </div>
                             </div>
-                            <div className="post-content">
-                                {post.content}
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
             </div>
         </div>
