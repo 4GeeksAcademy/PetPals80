@@ -1,0 +1,6 @@
+.post-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* Asegurar que la imagen se ajuste al tamaño sin distorsionarse */
+  }
+  

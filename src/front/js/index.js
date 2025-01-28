@@ -9,6 +9,7 @@ import "../styles/MyFeed.css";
 //import your own components
 import Layout from "./layout";
 import { MyFeed } from "./pages/MyFeed";    
+import { Publicaciones } from "./pages/Publicaciones";
 
 //render your react application
 ReactDOM.render(<Layout />, document.querySelector("#app"));
