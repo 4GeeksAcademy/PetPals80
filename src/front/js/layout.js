@@ -8,7 +8,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import MyFeed from "./pages/MyFeed"; // Importar el componente MyFeed
-import { Publicaciones } from "./pages/Publicaciones";
+
 
 
 import { Navbar } from "./component/navbar";
@@ -88,7 +88,7 @@ const Layout = () => {
 						<Route path="/MyRegister" element={<MyRegister />} />
                         <Route element={<MyFeed />} path="/MyFeed" />
                         <Route element={<MyLogin />} path="/MyLogin" />
-                        <Route element={<Publicaciones />} path="/Publicaciones" />
+                        
 
                         <Route path="/foros-gatos" element={<ForosGatos />} /> 
                             <Route path="/foros-gatos/cuidados" element={<CuidadosGatos />} />

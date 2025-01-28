@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
-import { Publicaciones } from "./Publicaciones"; // Importar el nuevo componente
 
 const MyFeed = () => {
   const [profileImage, setProfileImage] = useState('');
