@@ -4,13 +4,12 @@ import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
 import { Publicaciones } from "./Publicaciones"; // Importar el nuevo componente
 
 const MyFeed = () => {
-  // Estados para los campos editables
-  const [name, setName] = useState(() => localStorage.getItem("name") || "");
-  const [location, setLocation] = useState(() => localStorage.getItem("location") || "");
-  const [profileImage, setProfileImage] = useState(""); // Inicializar como cadena vacía
+  const [profileImage, setProfileImage] = useState('');
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [name, setName] = useState('');
+  const [location, setLocation] = useState('');
   const [bannerImage, setBannerImage] = useState("path-to-banner-image.jpg"); // Estado para la imagen del banner
   const [bio, setBio] = useState(() => localStorage.getItem("bio") || ""); // Estado para la biografía
-  const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [isEditingBio, setIsEditingBio] = useState(false); // Estado para editar la biografía
   const [activeTab, setActiveTab] = useState("bio"); // Estado para la pestaña activa
@@ -22,7 +21,8 @@ const MyFeed = () => {
     breed: "",
     age: "",
     bio: "",
-    image: ""
+    image: "", // Imagen de la mascota
+    bioImage: "" // Imagen de la biografía
   });
 
   useEffect(() => {
@@ -41,7 +41,13 @@ const MyFeed = () => {
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) setProfileImage(URL.createObjectURL(file));
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileImage(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
   const handleBannerImageChange = (e) => {
     const file = e.target.files[0];
@@ -72,13 +78,17 @@ const MyFeed = () => {
     }));
   };
 
-  const handlePetImageChange = (e) => {
+  const handleBioImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
       setPetDetails((prevDetails) => ({
         ...prevDetails,
-        image: URL.createObjectURL(file)
+        bioImage: reader.result
       }));
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
@@ -89,13 +99,37 @@ const MyFeed = () => {
       breed: "",
       age: "",
       bio: "",
-      image: ""
+      image: "",
+      bioImage: ""
     });
     setIsAddingPet(false);
   };
 
   const handleDeletePet = (index) => {
     setPets((prevPets) => prevPets.filter((_, i) => i !== index));
+  };
+
+  const handleChangeImage = (index) => {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setPets((prevPets) =>
+          prevPets.map((pet, i) =>
+            i === index ? { ...pet, image: URL.createObjectURL(file) } : pet
+          )
+        );
+      }
+    };
+    fileInput.click();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setIsEditingName(false);
+      setIsEditingLocation(false);
+    }
   };
 
   return (
@@ -122,7 +156,7 @@ const MyFeed = () => {
             {profileImage ? (
               <img src={profileImage} alt="Profile" className="profile-image" />
             ) : (
-              <div className="placeholder-image"></div>
+              <div className="placeholder-image">+</div>
             )}
           </label>
           <input
@@ -132,7 +166,7 @@ const MyFeed = () => {
             onChange={handleImageChange}
           />
           <button onClick={() => document.getElementById('profile-image-upload').click()} className="change-image-button">
-            Cambiar Foto
+            X
           </button>
         </div>
         
@@ -145,13 +179,11 @@ const MyFeed = () => {
               value={name}
               onChange={handleNameChange}
               onBlur={() => setIsEditingName(false)}
+              onKeyPress={handleKeyPress}
               className="editable-input name-input"
             />
           ) : (
-            <div className="editable-display">
-              {name || "Ingresa tu nombre"}
-              <button onClick={() => setIsEditingName(true)} className="edit-button">Editar</button>
-            </div>
+            <h3 onClick={() => setIsEditingName(true)}>{name || 'Nombre'}</h3>
           )}
 
           {/* Ubicación editable */}
@@ -161,12 +193,12 @@ const MyFeed = () => {
               value={location}
               onChange={handleLocationChange}
               onBlur={() => setIsEditingLocation(false)}
+              onKeyPress={handleKeyPress}
               className="editable-input location-input"
             />
           ) : (
             <div className="editable-display">
               {location || "Ingresa tu ubicación"}
-              <button onClick={() => setIsEditingLocation(true)} className="edit-button">Editar</button>
             </div>
           )}
         </div>
@@ -220,49 +252,40 @@ const MyFeed = () => {
 
         {/* Formulario para agregar mascota */}
         {isAddingPet && (
-          <div className="add-pet-form">
-            <div className="profile-image-container">
-              <label htmlFor="pet-image-upload">
-                {petDetails.image ? (
-                  <img src={petDetails.image} alt="Pet" className="profile-image" />
-                ) : (
-                  <div className="placeholder-image"></div>
-                )}
-              </label>
-              <input
-                type="file"
-                id="pet-image-upload"
-                style={{ display: "none" }}
-                onChange={handlePetImageChange}
-              />
-              <button onClick={() => document.getElementById('pet-image-upload').click()} className="change-image-button">
-                Cambiar Foto
-              </button>
+          <div className="pet-profile">
+            <div className="pet-details-container">
+              <div className="image-container">
+                <img src={petDetails.image || 'placeholder-image-url'} alt="Nueva Mascota" className="profile-image" />
+                <input type="file" onChange={handleImageChange} className="change-image-input" />
+                <button onClick={() => setPetDetails((prevDetails) => ({ ...prevDetails, image: '' }))} className="change-image-button">X</button>
+              </div>
+              <div className="pet-details">
+                <input
+                  type="text"
+                  name="name"
+                  value={petDetails.name}
+                  onChange={handlePetDetailsChange}
+                  placeholder="Nombre"
+                  className="editable-input"
+                />
+                <input
+                  type="text"
+                  name="breed"
+                  value={petDetails.breed}
+                  onChange={handlePetDetailsChange}
+                  placeholder="Raza"
+                  className="editable-input"
+                />
+                <input
+                  type="text"
+                  name="age"
+                  value={petDetails.age}
+                  onChange={handlePetDetailsChange}
+                  placeholder="Edad"
+                  className="editable-input"
+                />
+              </div>
             </div>
-            <input
-              type="text"
-              name="name"
-              value={petDetails.name}
-              onChange={handlePetDetailsChange}
-              placeholder="Nombre de la mascota"
-              className="editable-input"
-            />
-            <input
-              type="text"
-              name="breed"
-              value={petDetails.breed}
-              onChange={handlePetDetailsChange}
-              placeholder="Raza"
-              className="editable-input"
-            />
-            <input
-              type="text"
-              name="age"
-              value={petDetails.age}
-              onChange={handlePetDetailsChange}
-              placeholder="Edad"
-              className="editable-input"
-            />
             <textarea
               name="bio"
               value={petDetails.bio}
@@ -270,6 +293,8 @@ const MyFeed = () => {
               placeholder="Biografía del animal"
               className="bio-input"
             />
+            <div className="bio-image-container">
+            </div>
             <button onClick={handleSavePet} className="save-bio-button">Guardar Mascota</button>
           </div>
         )}
@@ -278,14 +303,19 @@ const MyFeed = () => {
         <div className="pets-section">
           {pets.map((pet, index) => (
             <div key={index} className="pet-profile">
-              <img src={pet.image} alt={pet.name} className="profile-image" />
-              <div className="pet-details">
-                <h3>{pet.name}</h3>
-                <p>Raza: {pet.breed}</p>
-                <p>Edad: {pet.age}</p>
-                <p>{pet.bio}</p>
+              <div className="pet-details-container">
+                <div className="image-container">
+                  <img src={pet.image} alt={pet.name} className="profile-image" />
+                  <button onClick={() => handleChangeImage(index)} className="change-image-button">X</button>
+                </div>
+                <div className="pet-details">
+                  <h3>{pet.name}</h3>
+                  <p>Raza: {pet.breed}</p>
+                  <p>Edad: {pet.age}</p>
+                </div>
               </div>
-              <button onClick={() => handleDeletePet(index)} className="delete-pet-button">Eliminar Mascota</button>
+              <p className="pet-bio">{pet.bio}</p>
+              <button onClick={() => handleDeletePet(index)} className="delete-pet-button">X</button>
             </div>
           ))}
         </div>
