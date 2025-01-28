@@ -13,7 +13,6 @@ import MyFeed from "./pages/MyFeed"; // Importar el componente MyFeed
 
 import { Navbar } from "./component/navbar";
 
-
 import { Foros } from "./pages/Foros.jsx";
 import { MisForos } from "./pages/MisForos.jsx";
 import { About } from "./pages/About.jsx";
