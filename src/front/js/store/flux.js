@@ -131,7 +131,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				},
 				
 				
-				
 				createForumPost: async (forumId, content) => {
 					try {
 						const resp = await fetch(process.env.BACKEND_URL + `/api/forums/${forumId}/posts`, {
@@ -152,7 +151,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error('Error creating post:', error);
 						return false;
 					}
-				}
+				},
+			
+				// Add this to your actions object in flux.js
+createComment: async (postId, content) => {
+    try {
+        const resp = await fetch(process.env.BACKEND_URL + `/api/posts/${postId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ content })
+        });
+        return resp.ok;
+    } catch (error) {
+        console.error('Error creating comment:', error);
+        return false;
+    }
+
+},
+
+getPostComments: async (postId) => {
+    try {
+        const resp = await fetch(process.env.BACKEND_URL + `/api/posts/${postId}/comments`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        if (!resp.ok) throw new Error('Failed to fetch comments');
+        const data = await resp.json();
+        return data;
+    } catch (error) {
+        console.error('Error loading comments:', error);
+        return null;
+    }
+}
 		}
 	};
 };

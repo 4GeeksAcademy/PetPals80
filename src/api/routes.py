@@ -410,3 +410,40 @@ def create_forum_post(forum_id):
         db.session.rollback()
         return jsonify({"error": str(e)}), 400
     
+
+    
+@api.route('/posts/<int:post_id>/comments', methods=['POST'])
+@jwt_required()
+def create_post_comment(post_id):
+    try:
+        current_user_id = get_jwt_identity()
+        data = request.json
+        
+        post = Posts.query.get(post_id)
+        if not post:
+            return jsonify({"error": "Post not found"}), 404
+            
+        new_comment = Comments(
+            content=data['content'],
+            post_id=post_id,
+            user_id=current_user_id,
+            forum_id=post.forum_id
+        )
+        
+        db.session.add(new_comment)
+        db.session.commit()
+        
+        return jsonify({"message": "Comment created"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+    
+
+@api.route('/posts/<int:post_id>/comments', methods=['GET'])
+def get_post_comments(post_id):
+    try:
+        comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.created_at.desc()).all()
+        comments_list = [comment.serialize() for comment in comments]
+        return jsonify(comments_list), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
