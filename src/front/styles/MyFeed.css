@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Oswald', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -73,6 +73,7 @@ body {
 .profile-section {
     text-align: center;
     margin: 20px 0;
+    font-family: 'Oswald', sans-serif;
 }
 
 .profile-section .profile-image {
@@ -185,10 +186,12 @@ body {
     flex-wrap: nowrap;
     align-content: center;
     padding-inline: 669px;
+    font-family: 'Oswald', sans-serif;
 }
 
 .edit-buttons-container {
     margin-top: 10px;
+    font-family: 'Oswald', sans-serif;
 }
 
 .profile-image-container {
@@ -241,6 +244,7 @@ body {
     color: #CBCBE7;
     margin: 0 15px;
     text-decoration: none;
+    font-family: 'Oswald', sans-serif;
 }
 
 .tabs a.active {

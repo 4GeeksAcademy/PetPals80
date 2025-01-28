@@ -7,7 +7,7 @@ const MyFeed = () => {
   const [profileImage, setProfileImage] = useState('');
   const [isEditingName, setIsEditingName] = useState(false);
   const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(() => localStorage.getItem("location") || "");
   const [bannerImage, setBannerImage] = useState("path-to-banner-image.jpg"); // Estado para la imagen del banner
   const [bio, setBio] = useState(() => localStorage.getItem("bio") || ""); // Estado para la biografía
   const [isEditingLocation, setIsEditingLocation] = useState(false);
@@ -156,7 +156,7 @@ const MyFeed = () => {
             {profileImage ? (
               <img src={profileImage} alt="Profile" className="profile-image" />
             ) : (
-              <div className="placeholder-image">+</div>
+              <div className="placeholder-image"></div>
             )}
           </label>
           <input
@@ -199,6 +199,7 @@ const MyFeed = () => {
           ) : (
             <div className="editable-display">
               {location || "Ingresa tu ubicación"}
+
             </div>
           )}
         </div>
@@ -325,3 +326,4 @@ const MyFeed = () => {
 };
 
 export default MyFeed;
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet"></link>
