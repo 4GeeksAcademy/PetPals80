@@ -101,17 +101,25 @@ const AccesoriosPerros = () => {
                             <div key={post.id} className="post-card">
                                 <div className="post-header">
                                     <div className="user-info">
-                                        <div className="user-avatar"></div>
-                                        <span className="username">{post.username}</span>
+                                        <div className="user-avatar">
+                                            {/* Placeholder avatar using the first letter of username */}
+                                            <div className="avatar-circle">
+                                                {post.username ? post.username[0].toUpperCase() : '?'}
+                                            </div>
+                                        </div>
+                                        <div className="user-details">
+                                            <span className="username">{post.username}</span>
+                                            <span className="post-time">
+                                                {new Date(post.created_at).toLocaleString()}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <span className="post-time">
-                                        {new Date(post.created_at).toLocaleString()}
-                                    </span>
                                 </div>
                                 <div className="post-content">
                                     {post.content}
                                 </div>
                             </div>
+                            
                         ))
                     )}
                 </div>
