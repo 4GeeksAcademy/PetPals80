@@ -125,6 +125,7 @@ class Comments(db.Model):
             "id": self.id,
             "post_id": self.post_id,
             "user_id": self.user_id,
+            "username": self.user.username if self.user else "Unknown User", #SGC ADDED USERNAME
             "content": self.content,
             "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
