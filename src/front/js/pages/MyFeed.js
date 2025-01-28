@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
-import { Publicaciones } from "./Publicaciones"; // Importar el nuevo componente
 
 const MyFeed = () => {
   const [profileImage, setProfileImage] = useState('');
@@ -227,77 +226,78 @@ const MyFeed = () => {
 
         {/* Sección de biografía más abajo */}
         {activeTab === "bio" && (
-          <div className="bio-section">
-            {isEditingBio ? (
-              <div>
+          <>
+            <div className="bio-section">
+              {isEditingBio ? (
+                <div>
+                  <textarea
+                    value={bio}
+                    onChange={handleBioChange}
+                    placeholder="Escribe tu biografía aquí..."
+                    className="bio-input"
+                  />
+                  <button onClick={handleSaveBio} className="save-bio-button">
+                    Guardar Biografía
+                  </button>
+                </div>
+              ) : (
+                <div onClick={handleEditBio}>
+                  <p>{bio}</p>
+                </div>
+              )}
+            </div>
+            {/* Botón para agregar mascota */}
+            <button onClick={handleAddPet} className="save-bio-button">Agregar Mascota</button>
+
+            {/* Formulario para agregar mascota */}
+            {isAddingPet && (
+              <div className="pet-profile">
+                <div className="pet-details-container">
+                  <div className="image-container">
+                    <img src={petDetails.image || 'placeholder-image-url'} alt="Nueva Mascota" className="profile-image" />
+                    <input type="file" onChange={handleImageChange} className="change-image-input" />
+                    <button onClick={() => setPetDetails((prevDetails) => ({ ...prevDetails, image: '' }))} className="change-image-button">X</button>
+                  </div>
+                  <div className="pet-details">
+                    <input
+                      type="text"
+                      name="name"
+                      value={petDetails.name}
+                      onChange={handlePetDetailsChange}
+                      placeholder="Nombre"
+                      className="editable-input"
+                    />
+                    <input
+                      type="text"
+                      name="breed"
+                      value={petDetails.breed}
+                      onChange={handlePetDetailsChange}
+                      placeholder="Raza"
+                      className="editable-input"
+                    />
+                    <input
+                      type="text"
+                      name="age"
+                      value={petDetails.age}
+                      onChange={handlePetDetailsChange}
+                      placeholder="Edad"
+                      className="editable-input"
+                    />
+                  </div>
+                </div>
                 <textarea
-                  value={bio}
-                  onChange={handleBioChange}
-                  placeholder="Escribe tu biografía aquí..."
+                  name="bio"
+                  value={petDetails.bio}
+                  onChange={handlePetDetailsChange}
+                  placeholder="Biografía del animal"
                   className="bio-input"
                 />
-                <button onClick={handleSaveBio} className="save-bio-button">
-                  Guardar Biografía
-                </button>
-              </div>
-            ) : (
-              <div onClick={handleEditBio}>
-                <p>{bio}</p>
+                <div className="bio-image-container">
+                </div>
+                <button onClick={handleSavePet} className="save-bio-button">Guardar Mascota</button>
               </div>
             )}
-          </div>
-        )}
-
-        {/* Botón para agregar mascota */}
-        <button onClick={handleAddPet} className="save-bio-button">Agregar Mascota</button>
-
-        {/* Formulario para agregar mascota */}
-        {isAddingPet && (
-          <div className="pet-profile">
-            <div className="pet-details-container">
-              <div className="image-container">
-                <img src={petDetails.image || 'placeholder-image-url'} alt="Nueva Mascota" className="profile-image" />
-                <input type="file" onChange={handleImageChange} className="change-image-input" />
-                <button onClick={() => setPetDetails((prevDetails) => ({ ...prevDetails, image: '' }))} className="change-image-button">X</button>
-              </div>
-              <div className="pet-details">
-                <input
-                  type="text"
-                  name="name"
-                  value={petDetails.name}
-                  onChange={handlePetDetailsChange}
-                  placeholder="Nombre"
-                  className="editable-input"
-                />
-                <input
-                  type="text"
-                  name="breed"
-                  value={petDetails.breed}
-                  onChange={handlePetDetailsChange}
-                  placeholder="Raza"
-                  className="editable-input"
-                />
-                <input
-                  type="text"
-                  name="age"
-                  value={petDetails.age}
-                  onChange={handlePetDetailsChange}
-                  placeholder="Edad"
-                  className="editable-input"
-                />
-              </div>
-            </div>
-            <textarea
-              name="bio"
-              value={petDetails.bio}
-              onChange={handlePetDetailsChange}
-              placeholder="Biografía del animal"
-              className="bio-input"
-            />
-            <div className="bio-image-container">
-            </div>
-            <button onClick={handleSavePet} className="save-bio-button">Guardar Mascota</button>
-          </div>
+          </>
         )}
 
         {/* Mostrar mascotas */}
