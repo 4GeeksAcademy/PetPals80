@@ -75,3 +75,4 @@ export const Publicaciones = ({ posts, setPosts }) => {
     </div>
   );
 };
+
