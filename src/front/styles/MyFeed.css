@@ -402,12 +402,6 @@ body {
 }
 
 /* Estilos para la sección de mascotas */
-.pets-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-}
 
 .pet-profile {
   display: flex;
@@ -737,3 +731,30 @@ body {
 }
 
 /* ...existing code... */
+
+.pets-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  flex-direction: column;
+  align-content: center;
+  align-items: stretch;
+}
+
+.pet-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.save-bio-button {
+  align-self: center;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 12px;
+  margin: 17px;
+}
