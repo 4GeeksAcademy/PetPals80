@@ -220,9 +220,6 @@ const MyFeed = () => {
         </div>
         <div className="tabs-line"></div> {/* Línea de color debajo de las pestañas */}
 
-        {/* Contenido de las pestañas */}
-        {activeTab === "posts" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones */}
-        {activeTab === "social" && <Publicaciones posts={posts} setPosts={setPosts} />} {/* Mostrar componente Publicaciones en Social */}
 
         {/* Sección de biografía más abajo */}
         {activeTab === "bio" && (
@@ -246,6 +243,7 @@ const MyFeed = () => {
                 </div>
               )}
             </div>
+          
             {/* Botón para agregar mascota */}
             <button onClick={handleAddPet} className="save-bio-button">Agregar Mascota</button>
 
