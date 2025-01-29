@@ -2,7 +2,7 @@ import os
 from flask_admin import Admin # type: ignore
 from flask import redirect, url_for
 from flask_admin.contrib.sqla import ModelView # type: ignore
-from api.models import db, Users, Followers, Forums, Posts, Comments, Bans
+from api.models import db, Users, Followers, Forums, Posts, Comments, Bans, Favorites
 
 def setup_admin(app):
     # Ensure FLASK_APP_KEY is set
@@ -20,6 +20,8 @@ def setup_admin(app):
         admin.add_view(ModelView(Posts, db.session))
         admin.add_view(ModelView(Comments, db.session))
         admin.add_view(ModelView(Bans, db.session))
+        admin.add_view(ModelView(Favorites, db.session))
+
     except Exception as e:
         print(f"Error adding model to admin: {e}")
         raise
