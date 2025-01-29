@@ -13,8 +13,8 @@ import Publicaciones from "./pages/Publicaciones";
 
 import { Navbar } from "./component/navbar";
 
-
 import { Foros } from "./pages/Foros.jsx";
+import { MisForos } from "./pages/MisForos.jsx";
 import { About } from "./pages/About.jsx";
 import { Login } from "./pages/Login.jsx";
 import { MyRegister } from "./pages/MyRegister.jsx";
@@ -83,6 +83,7 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route path="/foros" element={<Foros />} />
+                        <Route path="/mis-foros" element={<MisForos />} />
 						<Route path="/about" element={<About />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/MyRegister" element={<MyRegister />} />

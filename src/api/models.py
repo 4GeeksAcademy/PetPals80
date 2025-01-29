@@ -176,3 +176,18 @@ class Images(db.Model):
             "created_at": self.created_at
         }
 
+# Favorites Table for Mis Foros SGC -----------------------------------------
+class Favorites(db.Model):
+    __tablename__ = 'favorites'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    forum_id = db.Column(db.Integer, db.ForeignKey('forums.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "forum_id": self.forum_id,
+            "created_at": self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
