@@ -97,7 +97,7 @@ const AccesoriosPerros = () => {
             ...prev,
             [postId]: "",
           }));
-          await loadComments(postId); // Load updated comments
+          await loadComments(postId);
         } else {
           setError("Error creating comment. Please try again.");
         }
@@ -110,21 +110,16 @@ const AccesoriosPerros = () => {
 
   return (
     <div className="subforum-page">
-      <div className="subforum-content">
-        <div className="forum-image">
-          <img
-            src={perros}
-            alt="Perros"
-            className="dog-image"
-            style={{
-              width: "200px",
-              display: "block",
-              margin: "0 auto 20px auto",
-            }}
-          />
-        </div>
+      <div className="decorative-line-1"></div>
+      <div className="decorative-line-2"></div>
 
-        <h1 className="forum-title">Accesorios</h1>
+      <div className="subforum-content">
+        <div className="content-section">
+          <div className="image-section">
+            <img src={perros} alt="Perros" className="perros-image" />
+          </div>
+          <h1 className="main-title">Accesorios</h1>
+        </div>
 
         {error && (
           <div className="alert alert-danger" role="alert">
@@ -145,7 +140,6 @@ const AccesoriosPerros = () => {
           />
           <button
             type="submit"
-            className="btn btn-primary"
             disabled={!newPost.trim() || !localStorage.getItem("token")}
           >
             Post
@@ -162,10 +156,8 @@ const AccesoriosPerros = () => {
               <div key={post.id} className="post-card">
                 <div className="post-header">
                   <div className="user-info">
-                    <div className="user-avatar">
-                      <div className="avatar-circle">
-                        {post.username ? post.username[0].toUpperCase() : "?"}
-                      </div>
+                    <div className="avatar-circle">
+                      {post.username ? post.username[0].toUpperCase() : "?"}
                     </div>
                     <div className="user-details">
                       <span className="username">{post.username}</span>
@@ -177,7 +169,7 @@ const AccesoriosPerros = () => {
                 </div>
                 <div className="post-content">{post.content}</div>
 
-                <div className="mt-3 border-t pt-2">
+                <div className="comments-section">
                   <button
                     onClick={() => {
                       setActivePost(activePost === post.id ? null : post.id);
@@ -185,33 +177,30 @@ const AccesoriosPerros = () => {
                         loadComments(post.id);
                       }
                     }}
-                    className="text-blue-500 hover:text-blue-700"
-                    type="button"
                   >
                     {activePost === post.id ? "Hide Comments" : "Show Comments"}
                   </button>
 
                   {activePost === post.id && (
-                    <div className="mt-2">
+                    <div className="comments-container">
                       {comments[post.id]?.map((comment) => (
-                        <div
-                          key={comment.id}
-                          className="mb-2 ml-4 p-2 bg-gray-50 rounded"
-                        >
-                          <div className="text-sm text-gray-600 flex items-center">
-                            <div className="avatar-circle w-6 h-6 mr-2">
+                        <div key={comment.id} className="comment-card">
+                          <div className="comment-header">
+                            <div className="avatar-circle">
                               {comment.username
                                 ? comment.username[0].toUpperCase()
                                 : "?"}
                             </div>
-                            <span className="font-medium">
-                              {comment.username}
-                            </span>
-                            <span className="ml-2 text-xs">
-                              {new Date(comment.created_at).toLocaleString()}
-                            </span>
+                            <div className="user-details">
+                              <span className="username">
+                                {comment.username}
+                              </span>
+                              <span className="post-time">
+                                {new Date(comment.created_at).toLocaleString()}
+                              </span>
+                            </div>
                           </div>
-                          <div className="mt-1">{comment.content}</div>
+                          <div className="comment-content">{comment.content}</div>
                         </div>
                       ))}
 
@@ -225,13 +214,10 @@ const AccesoriosPerros = () => {
                             ? "Write your comment..."
                             : "Please log in to comment"
                         }
-                        className="w-full p-2 border rounded mt-2"
-                        rows="2"
+                        className="post-input"
                       />
                       <button
                         onClick={() => handleSubmitComment(post.id)}
-                        className="mt-2 px-4 py-1 bg-blue-500 text-white rounded"
-                        type="button"
                         disabled={
                           !commentTexts[post.id]?.trim() ||
                           !localStorage.getItem("token")
