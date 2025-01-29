@@ -25,3 +25,5 @@ def setup_admin(app):
     except Exception as e:
         print(f"Error adding model to admin: {e}")
         raise
+
+
