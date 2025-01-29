@@ -174,13 +174,19 @@ const MyFeed = () => {
           <div className="pets-section">
             <button onClick={handleAddPet} className="save-bio-button">Agregar Mascota</button>
             {isAddingPet && (
-              <div className="pet-form">
-                <input type="text" name="name" value={petDetails.name} onChange={handlePetDetailsChange} placeholder="Nombre" />
-                <input type="text" name="breed" value={petDetails.breed} onChange={handlePetDetailsChange} placeholder="Raza" />
-                <input type="text" name="age" value={petDetails.age} onChange={handlePetDetailsChange} placeholder="Edad" />
-                <textarea name="bio" value={petDetails.bio} onChange={handlePetDetailsChange} placeholder="Biografía" />
-                <input type="file" onChange={handlePetImageChange} />
-                <button onClick={handleSavePet} className="save-bio-button">Guardar Mascota</button>
+              <div className="pet-form-container">
+                <div className="pet-form">
+                  <div className="pet-image-upload">
+                    <input type="file" onChange={handlePetImageChange} />
+                  </div>
+                  <div className="pet-details">
+                    <input type="text" name="name" value={petDetails.name} onChange={handlePetDetailsChange} placeholder="Nombre" />
+                    <input type="text" name="breed" value={petDetails.breed} onChange={handlePetDetailsChange} placeholder="Raza" />
+                    <input type="text" name="age" value={petDetails.age} onChange={handlePetDetailsChange} placeholder="Edad" />
+                    <textarea name="bio" value={petDetails.bio} onChange={handlePetDetailsChange} placeholder="Biografía" />
+                  </div>
+                  <button onClick={handleSavePet} className="save-bio-button">Guardar Mascota</button>
+                </div>
               </div>
             )}
             {pets.map((pet, index) => (
