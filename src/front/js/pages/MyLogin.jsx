@@ -63,7 +63,7 @@ export const MyLogin = () => {
                                 <a href="#" className="forgot-password">¿Olvidaste contraseña?</a>
                                 <div className="register-prompt">
                                     <span>¿Nuevo por aquí? </span>
-                                    <a href="/register" className="register-link">Regístrate</a>
+                                    <a href="/MyRegister" className="register-link">Regístrate</a>
                                 </div>
                             </div>
                         </form>
