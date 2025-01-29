@@ -3,9 +3,8 @@
 .foros-aves-container {
     position: relative;
     padding: 40px 20;
-
     margin: 0 auto;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Lexend', sans-serif; 
     overflow: hidden; 
 }
 

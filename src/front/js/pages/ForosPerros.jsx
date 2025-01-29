@@ -11,11 +11,11 @@ export const ForosPerros = () => {
     const [favorites, setFavorites] = useState({});
 
     const categories = [
-        { name: 'Cuidados', members: '567 Miembros', icon: '🏥', id: FORUM_IDS.PERROS.CUIDADOS },
-        { name: 'Alimento', members: '4504 Miembros', icon: '🍖', id: FORUM_IDS.PERROS.ALIMENTO },
-        { name: 'Etologia', members: '3365 Miembros', icon: '🐶', id: FORUM_IDS.PERROS.ETOLOGIA },
-        { name: 'Accesorios', members: '8554 Miembros', icon: '🦴', id: FORUM_IDS.PERROS.ACCESORIOS },
-        { name: 'Adiestramiento', members: '185 Miembros', icon: '🦮', id: FORUM_IDS.PERROS.ADIESTRAMIENTO }
+        { name: 'Cuidados', icon: '🏥', id: FORUM_IDS.PERROS.CUIDADOS },
+        { name: 'Alimento', icon: '🍖', id: FORUM_IDS.PERROS.ALIMENTO },
+        { name: 'Etologia', icon: '🐶', id: FORUM_IDS.PERROS.ETOLOGIA },
+        { name: 'Accesorios', icon: '🦴', id: FORUM_IDS.PERROS.ACCESORIOS },
+        { name: 'Adiestramiento', icon: '🦮', id: FORUM_IDS.PERROS.ADIESTRAMIENTO }
     ];
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export const ForosPerros = () => {
     };
 
     const handleFavorite = async (e, forumId) => {
-        e.stopPropagation(); // Prevent navigation when clicking favorite button
+        e.stopPropagation();
         
         if (!localStorage.getItem('token')) {
             navigate('/login');
@@ -78,12 +78,12 @@ export const ForosPerros = () => {
             </div>
 
             <div className="main-content-grid">
-                <div className="cat-image-section">
-                    <div className="cat-image-container">
+                <div className="perros-image-section">
+                    <div className="perros-image-container">
                         <img 
                             src={perros} 
                             alt="Perros" 
-                            className="perros-image" 
+                            className="perros-image"
                             onClick={() => navigate('/foros')}
                             style={{ cursor: 'pointer' }} 
                         />
@@ -96,19 +96,25 @@ export const ForosPerros = () => {
                             key={category.id} 
                             className="category-card"
                             onClick={() => navigate(`/foros-perros/${category.name.toLowerCase()}`)}
-                            style={{ cursor: 'pointer' }}
                         >
-                            <div className="category-icon">{category.icon}</div>
+                            <div className="category-icon">
+                                {category.icon}
+                            </div>
                             <div className="category-info">
-                                <span className="category-name">/ {category.name} /</span>
-                                <span className="member-count">{category.members}</span>
+                                <span className="category-name">{category.name}</span>
                             </div>
                             {localStorage.getItem('token') && (
                                 <button
                                     onClick={(e) => handleFavorite(e, category.id)}
-                                    className={`favorite-btn ${favorites[category.id] ? 'active' : ''}`}
+                                    className="favorite-btn-new"
+                                    aria-label={favorites[category.id] ? 'Remove from favorites' : 'Add to favorites'}
                                 >
-                                    {favorites[category.id] ? '★' : '☆'}
+                                    <span className={`star-icon ${favorites[category.id] ? 'active' : ''}`}>
+                                        {favorites[category.id] ? '★' : '☆'}
+                                    </span>
+                                    <span className="tooltip-text">
+                                        {favorites[category.id] ? 'Remove from favorites' : 'Add to favorites'}
+                                    </span>
                                 </button>
                             )}
                         </div>
