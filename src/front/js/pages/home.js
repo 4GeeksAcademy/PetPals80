@@ -10,9 +10,12 @@ import pers2 from "../../img/personaliza-2.png"
 import gatuna from "../../img/gatuna-03.png"
 import conocer from "../../img/conocer-04.png"
 import presentacion from "../../img/presentacion-05.png"
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
 
 	return (
 		<div  className="background" style={{ backgroundImage: `url(${recurso2})`, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', backgroundSize: 'cover', }}>
@@ -23,8 +26,12 @@ export const Home = () => {
 					¡Únete a nuestros foros y mantente al día con noticias y eventos especiales!</h5>
 				</div>
 					<div className="inicio-registro">
-						<button className='registro' type='submit' value="register" disabled={localStorage.getItem('token') ? true : false}>Registro</button>
-						<button type="submit" className="entrar">Entrar</button>
+						<div>
+						<button type="submit" className="entrar" onClick={() => navigate('/MyRegister')}>Registro</button>
+						</div>
+						<div>
+							<button type="submit" className="entrar" onClick={() => navigate('/MyLogin')}>Entrar</button>
+						</div>
 					</div>
 						<div className="recurso-perros">
 							< img src={recurso1} className="recurso-home" alt="Famila perruna" />
