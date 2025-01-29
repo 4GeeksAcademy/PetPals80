@@ -4,7 +4,7 @@
 .auth-wrapper {
     min-height: 100vh;
     background-color: #f8f9fa;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Lexend', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +65,7 @@
     border-radius: 8px;
     font-size: 1.1rem;
     cursor: pointer;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Lexend', sans-serif;
 }
 
 .auth-button:hover {

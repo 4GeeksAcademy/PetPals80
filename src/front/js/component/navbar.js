@@ -19,7 +19,7 @@ export const Navbar = (props) => {
 			  <Link to="/MyFeed">MY FEED</Link>
 			</li>
 			<li className="brand">
-			  <Link to="/MyRegister">
+			  <Link to="/">
 			  	<img src={Logo} alt="MyRegisterLogo" style={{width: '150px', height: '40px'}} />
 			  </Link>
 			</li>

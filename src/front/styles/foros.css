@@ -1,12 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
-
-
 .foros-container {
     position: relative;
-    padding: 40px 20;
-
+    padding: 40px 20px;
     margin: 0 auto;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Lexend', sans-serif;
     overflow: hidden; 
 }
 
@@ -67,6 +63,7 @@
 .content-section {
     text-align: center;
     margin-bottom: 50px;
+    margin-top: 30px;
 }
 
 .main-title {
@@ -96,11 +93,12 @@
 }
 
 .carousel-section {
-    margin-top: 50px;
+    position: relative;
+    margin: 50px auto;
 }
 
 .custom-carousel {
-    padding: 20px 0;
+    padding: 0 60px;
 }
 
 .carousel-group {
@@ -110,17 +108,60 @@
     padding: 20px;
 }
 
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+
+
+.slider-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.slider-button-prev {
+    left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.slider-button-next {
+    right: 0;
+    border-radius: 8px 0 0 8px;
+}
+
+.slider-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
 .pet-card {
     position: relative;
     width: 250px;
     height: 300px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: scale(1.4); 
+    z-index: 1; 
 }
 
 .pet-card img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transition: transform 0.3s ease;
 }
 
 
