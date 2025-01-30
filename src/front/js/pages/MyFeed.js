@@ -13,6 +13,7 @@ const MyFeed = () => {
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [activeTab, setActiveTab] = useState("posts"); // Control de pestañas
   const [posts, setPosts] = useState(() => JSON.parse(localStorage.getItem("posts")) || []); // Estado de publicaciones
+  const [forumPosts, setForumPosts] = useState([]); // Estado para los posts de Foros
   const [pets, setPets] = useState(() => JSON.parse(localStorage.getItem("pets")) || []); // Estado para las mascotas
   const [isAddingPet, setIsAddingPet] = useState(false);
   const [petDetails, setPetDetails] = useState({
@@ -28,6 +29,22 @@ const MyFeed = () => {
     if (!name) setIsEditingName(true);
     if (!location) setIsEditingLocation(true);
   }, [name, location]);
+
+  useEffect(() => {
+    if (activeTab === "social") {
+      loadForumPosts();
+    }
+  }, [activeTab]);
+
+  const loadForumPosts = async () => {
+    try {
+      const response = await fetch("/api/foros/posts"); // Ajusta la URL según tu API
+      const data = await response.json();
+      setForumPosts(data);
+    } catch (error) {
+      console.error("Error loading forum posts:", error);
+    }
+  };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -133,7 +150,8 @@ const MyFeed = () => {
   };
 
   const handleSavePost = () => {
-    const newPosts = [...posts, { content: newPost }];
+    const date = new Date();
+    const newPosts = [...posts, { content: newPost, date: date.toLocaleString() }];
     setPosts(newPosts);
     localStorage.setItem("posts", JSON.stringify(newPosts));
     setNewPost("");
@@ -280,7 +298,22 @@ const MyFeed = () => {
             {posts.map((post, index) => (
               <div key={index} className="post">
                 <p>{post.content}</p>
+                <p className="post-date">{post.date}</p>
                 <button onClick={() => handleDeletePost(index)} className="delete-post-button">X</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "social" && (
+        <div className="social-section">
+          <h2>Últimos Posts de Foros</h2>
+          <div className="forum-posts-container">
+            {forumPosts.map((post, index) => (
+              <div key={index} className="forum-post">
+                <p>{post.content}</p>
+                <p className="post-date">{post.date}</p>
               </div>
             ))}
           </div>

@@ -1026,3 +1026,16 @@ button {
   color: #F7BED1;
 }
 
+@media (min-width: 1200px) {
+  .h2, h2 {
+      font-size: 23px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 25px;
+      color: #F7BED1;
+  }
+}
