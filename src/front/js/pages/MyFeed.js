@@ -38,7 +38,10 @@ const MyFeed = () => {
 
   const loadForumPosts = async () => {
     try {
-      const response = await fetch("/api/foros/posts"); // Ajusta la URL según tu API
+      const response = await fetch(process.env.BACKEND_URL + "/api/favorites", {
+      headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }, }); // Ajusta la URL según tu API
       const data = await response.json();
       setForumPosts(data);
     } catch (error) {
@@ -227,7 +230,7 @@ const MyFeed = () => {
       <div className="tabs">
         <a href="#posts" className={activeTab === "posts" ? "active" : ""} onClick={() => setActiveTab("posts")}>Publicaciones</a>
         <a href="#bio" className={activeTab === "bio" ? "active" : ""} onClick={() => setActiveTab("bio")}>Biografía</a>
-        <a href="#social" className={activeTab === "social" ? "active" : ""} onClick={() => setActiveTab("social")}>Social</a>
+      
       </div>
 
       {/* Contenido de las pestañas */}
