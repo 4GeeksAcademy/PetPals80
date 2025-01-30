@@ -124,16 +124,17 @@ body {
 }
 
 .posts-section .add-post-button {
-    background-color: #BBDFD3;
+    background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 5px 10px; /* Tamaño más pequeño */
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .posts-section .add-post-button:hover {
-    background-color: #A0CFC1;
+    background-color: #F7BED1;
 }
 
 .posts-list {
@@ -254,17 +255,26 @@ body {
     line-height: 1;
 }
 
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .tabs a {
-    color: #CBCBE7;
-    margin: 0 15px;
-    text-decoration: none;
-    font-family: 'Oswald', sans-serif;
+  margin: 0 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 5px;
 }
 
 .tabs a.active {
-    font-weight: bold;
-    text-decoration: underline;
+  background-color: #007bff00;
+  color: #000;
+  text-decoration: underline;
 }
+
 
 .editable-display {
     font-size: 24px; /* Tamaño de letra más grande */
@@ -328,6 +338,19 @@ body {
   text-align: center;
 }
 
+button {
+  background-color: #B5D1E2;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+}
+
 .save-bio-button {
     background-color: #BBDFD3;
     color: #fff;
@@ -345,10 +368,10 @@ body {
 }
 
 .add-post-form {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .new-post-input {
@@ -374,16 +397,17 @@ body {
 }
 
 .save-post-button {
-    background-color: #BBDFD3;
+    background-color: #F7BED1;
     color: #fff;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .save-post-button:hover {
-    background-color: #A0CFC1;
+    background-color: #F7BED1;
 }
 
 .delete-post-button {
@@ -445,7 +469,7 @@ body {
 }
 
 .change-image-button {
-  position: absolute;
+  position: center;
   top: 5px;
   right: 5px;
   background-color: #F7BED1;
@@ -542,7 +566,8 @@ body {
 /* Estilos para el formulario de agregar mascota */
 .add-pet-form {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
 }
 
@@ -593,7 +618,7 @@ body {
 
 .add-pet-form .save-bio-button {
   align-self: center;
-  background-color: #28a745;
+  background-color: #F7BED1;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -759,3 +784,258 @@ body {
   margin: 17px;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.shared-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.shared-button:hover {
+  background-color: #F7BED1;
+}
+
+.add-pet-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pet-image-upload input {
+  margin-bottom: 10px;
+}
+
+.pet-details input,
+.pet-details textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.save-pet-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-pet-button:hover {
+  background-color: #F7BED1;
+}
+
+.pets-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pet-profile {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: auto; /* Ajusta el ancho del contenedor automáticamente */
+  min-width: 150px; /* Establece un ancho mínimo */
+  height: auto; /* Ajusta la altura del contenedor automáticamente */
+}
+
+.pet-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.pet-image-container {
+  position: relative;
+}
+
+.pet-info .profile-image {
+  margin-right: 10px;
+  width: 100px; /* Ajusta el tamaño de la imagen */
+  height: 100px; /* Ajusta el tamaño de la imagen */
+  border-radius: 50%;
+}
+
+.change-pet-image-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  color: #F7BED1;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.change-pet-image-button:hover {
+  color: #F7BED1;
+}
+
+.pet-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+}
+
+.pet-bio {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.delete-pet-button {
+  background-color: transparent;
+  border: none;
+  color: #F7BED1;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.delete-pet-button:hover {
+  color: #F7BED1;
+}
+
+.name-location-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.name-container,
+.location-container {
+  margin: 0 10px;
+}
+
+.editable-input {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.editable-display {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.editable-display:hover {
+  border: 1px solid #ccc;
+}
+
+.posts-section {
+  margin-top: 20px;
+}
+
+.add-post-form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-post-input {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 600px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.save-post-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #F7BED1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-post-button:hover {
+  background-color: #F7BED1;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  background-color: #edfff9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.delete-post-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #F7BED1;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-post-button:hover {
+  color: #F7BED1;
+}
+
+@media (min-width: 1200px) {
+  .h2, h2 {
+      font-size: 23px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      padding-top: 25px;
+      color: #F7BED1;
+  }
+}
