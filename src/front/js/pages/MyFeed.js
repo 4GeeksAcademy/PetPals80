@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
+import "../../styles/MyFeed.css";
 import Publicaciones from "./Publicaciones"; // Importa el componente Publicaciones
 
 const MyFeed = () => {

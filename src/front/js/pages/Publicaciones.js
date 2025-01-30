@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
-import { Context } from "/workspaces/PetPals80/src/front/js/store/appContext";
+import { Context } from "../store/appContext";
 import MyFeed from "./MyFeed";
 
 const Publicaciones = ({ posts }) => {
