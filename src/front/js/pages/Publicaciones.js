@@ -4,7 +4,7 @@ import "/workspaces/PetPals80/src/front/styles/MyFeed.css";
 import { Context } from "/workspaces/PetPals80/src/front/js/store/appContext";
 import MyFeed from "./MyFeed";
 
-const Publicaciones = ({ posts, setPosts }) => {
+const Publicaciones = ({ posts }) => {
   const [isAddingPost, setIsAddingPost] = useState(false);
   const [newPostContent, setNewPostContent] = useState("");
   const [newPostImage, setNewPostImage] = useState(null);
@@ -111,112 +111,17 @@ const Publicaciones = ({ posts, setPosts }) => {
     }
   };
   return (
-    <div className="Post-page">
-      <div className="decorative-line-1"></div>
-      <div className="decorative-line-2"></div>
-      <div className="Post-content">
-        <div className="content-section">
-      
-        <form onSubmit={handleSubmitPost}>
-          <textarea
-            value={newPost}
-            onChange={(e) => setNewPost(e.target.value)}
-            placeholder="Write your post..."
-            className="post-input"
-          />
-          <button type="submit">Post</button>
-        </form>
-        <div className="posts-list">
-          {isLoading ? (
-            <div>Loading posts...</div>
-          ) : store.currentPublicacionesPosts?.length === 0 ? (
-            <div>No posts yet. Be the first to post!</div>
-          ) : (
-            store.currentPublicacionesPosts?.map((post) => (
-              <div key={post.id} className="post-card">
-                <div className="post-header">
-                  <div className="user-info">
-                    <div className="avatar-circle">
-                      {post.username ? post.username[0].toUpperCase() : "?"}
-                      <div className="user-details">
-                        <span className="username">{post.username}</span>
-                        <span className="post-time">
-                          {new Date(post.created_at).toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                  <div className="post-content">{post.content}</div>
-                  <div className="comments-section">
-                  <button
-                    onClick={() => {
-                      setActivePost(activePost === post.id ? null : post.id);
-                      if (activePost !== post.id) {
-                        loadComments(post.id);
-                      }
-                    }}
-                  >
-                    {activePost === post.id ? "Hide Comments" : "Show Comments"}
-                  </button>
-                  {activePost === post.id && (
-                    <div className="comments-container">
-                      {comments[post.id]?.map((comment) => (
-                        <div key={comment.id} className="comment-card">
-                          <div className="comment-header">
-                            <div className="avatar-circle">
-                              {comment.username
-                                ? comment.username[0].toUpperCase()
-                                : "?"}
-                            </div>
-                            <div className="user-details">
-                              <span className="username">
-                                {comment.username}
-                              </span>
-                              <span className="post-time">
-                                {new Date(comment.created_at).toLocaleString()}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="comment-content">{comment.content}</div>
-                        </div>
-                      ))}
-                      <textarea
-                        value={commentTexts[post.id] || ""}
-                        onChange={(e) => {
-                          console.log("Comment changed for post:", post.id, "New value:", e.target.value);
-                          handleCommentChange(post.id, e.target.value);
-                        }}
-                        placeholder={
-                          localStorage.getItem("token")
-                            ? "Write your comment..."
-                            : "Please log in to comment"
-                        }
-                        className="post-input"
-                      />
-                      <button
-                        onClick={() => {
-                          console.log("Submit button clicked for post:", post.id);
-                          handleSubmitComment(post.id);
-                        }}
-                        disabled={
-                          !commentTexts[post.id]?.trim() ||
-                          !localStorage.getItem("token")
-                        }
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))
-          )}
-        </div>
+    <div className="publicaciones">
+      <div className="posts-container">
+        {posts.map((post, index) => (
+          <div key={index} className="post">
+            <p>{post.content}</p>
+          </div>
+        ))}
       </div>
-        </div>
-      </div>
+    </div>
   );
-}
+};
+
 export default Publicaciones;
 
